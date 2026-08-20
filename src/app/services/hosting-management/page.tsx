@@ -88,13 +88,18 @@ export default function HostingManagement() {
             </p>
           </div>
           
-          {/* Visual placeholder */}
-          <div className="md:col-span-4 relative aspect-[4/3] w-full border border-white/10 bg-bg-card rounded-2xl p-4 flex flex-col justify-between grid-pattern-fine">
-            <span className="text-[8px] font-space text-white/30">SERVER_NODE_STATUS</span>
-            <div className="w-full flex justify-center py-6 text-white/20">
-              <Server className="w-8 h-8 text-accent-cyan animate-pulse" />
+          {/* Visual background image with HUD overlays */}
+          <div className="md:col-span-4 relative aspect-[4/3] w-full border border-white/10 rounded-2xl overflow-hidden group">
+            <div 
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style={{ backgroundImage: `url('/services/hosting_bg.jpg')` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
+            <div className="absolute inset-0 grid-pattern opacity-10" />
+            <div className="absolute inset-0 p-4 flex flex-col justify-between z-10">
+              <span className="text-[8px] font-space text-white/50 tracking-wider">SERVER_NODE_STATUS // 100% OK</span>
+              <span className="text-[8px] font-space text-accent-violet text-center uppercase font-bold tracking-widest bg-black/60 backdrop-blur-sm py-1.5 px-3 rounded-full border border-white/5 mx-auto">UPTIME_99.9_OK</span>
             </div>
-            <span className="text-[8px] font-space text-accent-cyan text-center uppercase font-bold">UPTIME_99.9_OK</span>
           </div>
         </div>
 

@@ -102,6 +102,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/services/data-analysis"
+                  className="text-white/60 hover:text-accent-lime text-sm transition-colors"
+                >
+                  Data Analytics
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/services/it-consulting"
                   className="text-white/60 hover:text-accent-lime text-sm transition-colors"
                 >

@@ -14,6 +14,7 @@ const serviceLinks = [
   { name: "React & Next.js Dev", href: "/services/react-nextjs" },
   { name: "Hosting & Server Management", href: "/services/hosting-management" },
   { name: "Digital Marketing", href: "/services/digital-marketing" },
+  { name: "Data Analytics & Engineering", href: "/services/data-analysis" },
   { name: "IT Consulting", href: "/services/it-consulting" },
 ];
 
@@ -74,18 +75,20 @@ export default function Navbar() {
             <button className="flex items-center gap-1 font-sans text-sm font-medium text-white/70 hover:text-accent-lime transition-colors focus:outline-none cursor-pointer">
               Services <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
             </button>
-            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-bg-card border border-white/10 rounded-2xl p-2 shadow-2xl opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-200">
-              {serviceLinks.map((service) => (
-                <Link
-                  key={service.href}
-                  href={service.href}
-                  className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-colors hover:bg-white/5 hover:text-white ${
-                    pathname === service.href ? "text-accent-lime bg-white/5" : "text-white/70"
-                  }`}
-                >
-                  {service.name}
-                </Link>
-              ))}
+            <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-64 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+              <div className="bg-bg-card border border-white/10 rounded-2xl p-2 shadow-2xl">
+                {serviceLinks.map((service) => (
+                  <Link
+                    key={service.href}
+                    href={service.href}
+                    className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-colors hover:bg-white/5 hover:text-white ${
+                      pathname === service.href ? "text-accent-lime bg-white/5" : "text-white/70"
+                    }`}
+                  >
+                    {service.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 

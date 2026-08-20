@@ -1,51 +1,51 @@
 "use client";
 
 import Link from "next/link";
-import { Cloud, Database, ShieldAlert, Cpu, Layers, BarChart, Check, ArrowRight } from "lucide-react";
+import { Database, LineChart, Cpu, BarChart2, ShieldCheck, Activity, Check, ArrowRight } from "lucide-react";
 
-const cloudServices = [
+const analysisServices = [
   {
-    title: "AWS & Azure Infrastructure Design",
-    icon: Cloud,
-    desc: "Designing secure, highly available cloud topologies utilizing Amazon Web Services (AWS) or Microsoft Azure, tailored for your workload requirements."
+    title: "BI Dashboard Engineering",
+    icon: BarChart2,
+    desc: "Developing unified real-time telemetry dashboards utilizing tools like Looker, Tableau, or custom React charting engines to track critical business KPIs."
   },
   {
-    title: "Secure Cloud Migration",
-    icon: Layers,
-    desc: "Seamless, zero-downtime database and assets migration from legacy shared servers or on-premise infrastructure into structured cloud zones."
-  },
-  {
-    title: "Load Balancing & Traffic Routing",
-    icon: Cpu,
-    desc: "Deploying multi-region application load balancers and CDNs (Cloudflare/CloudFront) to route client traffic with latency minimization."
-  },
-  {
-    title: "Serverless & Elastic Computations",
+    title: "Database Performance Tuning",
     icon: Database,
-    desc: "Leveraging AWS Lambda, Fargate, and RDS clusters that dynamically scale computational resources based on real-time spikes."
+    desc: "Auditing read/write database latency, indexing fragmented tables, and refining slow SQL queries to cut server execution times."
   },
   {
-    title: "Cloud Cost Optimization",
-    icon: BarChart,
-    desc: "Thorough auditing of running cloud assets to prune idle instances, configure database sizing, and cut cloud bill inflation."
+    title: "Predictive Analytics Pipelines",
+    icon: Cpu,
+    desc: "Integrating regression algorithms and data collection models to forecast pipeline sales trends, customer churn, and inventory levels."
   },
   {
-    title: "IAM Hardening & VPC Isolation",
-    icon: ShieldAlert,
-    desc: "Isolating networks via VPC peering, securing database subnets, and configuring strict Identity and Access Management policies."
+    title: "Data Lake & ETL Engineering",
+    icon: Activity,
+    desc: "Building Extract-Transform-Load (ETL) data pipelines to aggregate distributed databases, log streams, and analytics nodes into secure data warehouses."
+  },
+  {
+    title: "Data Security & Compliance Audits",
+    icon: ShieldCheck,
+    desc: "Configuring safe data backup schedules, verifying encryption keys, and checking user logs auditing for regulatory frameworks."
+  },
+  {
+    title: "Conversion Attribution Modeling",
+    icon: LineChart,
+    desc: "Mapping customer acquisition touchpoints to attribute sales conversions precisely, pruning waste from marketing campaigns."
   }
 ];
 
-const problemsCloudSolves = [
-  "Extravagant cloud billing due to over-provisioned memory resources and unpruned storage buckets",
-  "Critical service downtime when traffic spikes overwhelm single-region server setups",
-  "Database failover crashes that cause permanent database table corruption or data loss",
-  "Security breaches from exposed cloud dashboards, public S3 buckets, and weak IAM roles",
-  "Slow site loading times for international visitors due to missing CDN and edge cache setups",
-  "Complex infrastructure fragmentation that prevents fast feature deployments and updates"
+const problemsDataSolves = [
+  "Scattered metrics spread across legacy systems that hide patterns from business decision makers",
+  "Extravagant database query execution latency that slows down web application page loading times",
+  "Fragmented user logs and events tracking that fails to attribute paid advertising conversions accurately",
+  "Compliance risks from unsecured, unencrypted database storage containing personal customer details",
+  "Inconsistent backup replication strategies, exposing the enterprise to permanent data losses",
+  "Wasted budget spending on legacy software licenses and duplicate database storage instances"
 ];
 
-export default function CloudSolutions() {
+export default function DataAnalysis() {
   return (
     <div className="relative min-h-screen bg-bg-deep pt-32 pb-20 overflow-hidden">
       
@@ -61,44 +61,44 @@ export default function CloudSolutions() {
           <span>/</span>
           <span>SERVICES</span>
           <span>/</span>
-          <span className="text-white">CLOUD_SOLUTIONS</span>
+          <span className="text-white">DATA_ANALYSIS</span>
         </div>
 
         {/* Heading */}
         <h1 className="font-space text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 uppercase">
-          CLOUD ARCHITECTURE <br />
-          <span className="text-accent-cyan border-b border-accent-cyan/30">& HYPER-SCALE SOLUTIONS</span>
+          DATA ANALYTICS <br />
+          <span className="text-accent-cyan border-b border-accent-cyan/30">& DECISION ENGINEERING</span>
         </h1>
 
         <p className="text-white/80 font-sans text-lg md:text-xl leading-relaxed mb-12 max-w-3xl">
-          Scalable cloud topologies designed for high availability, performance efficiency, and zero-trust security compliance. We map your code to elastic infrastructure architectures.
+          Transform unstructured user events and logs into precise scaling decisions. We optimize database infrastructure, build high-performance data pipelines, and craft real-time intelligence dashboards.
         </p>
 
         {/* Context Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center mb-20 border-t border-white/10 pt-16">
           <div className="md:col-span-8 flex flex-col gap-4">
             <h3 className="font-space text-xs font-bold tracking-[0.2em] text-white/40 uppercase">
-              THE ELASTIC REQUIREMENT
+              THE DATA ENGINE APPROACH
             </h3>
             <p className="text-white/60 text-sm leading-relaxed font-sans">
-              Deploying applications on static or unmonitored servers limits growth and exposes your company to system outages during scaling spikes. Modern businesses require secure, load-balanced, and highly resilient cloud architectures.
+              Modern companies generate millions of rows of logs, user actions, and server logs daily. Yet, most organizations make decisions based on guesswork because their data remains locked in scattered silos or runs on unindexed, slow database queries.
             </p>
             <p className="text-white/60 text-sm leading-relaxed font-sans">
-              Whynot27 engineers multi-region cloud infrastructures that protect sensitive data while maintaining sub-second application response times globally.
+              Whynot27 engineers high-performance analytics pipelines that clean and index your database systems, enabling live decision telemetry that drives product improvements and reduces cost wastage.
             </p>
           </div>
           
-          {/* Visual background image with HUD overlays */}
+          {/* Visual HUD with Dark Background Image */}
           <div className="md:col-span-4 relative aspect-[4/3] w-full border border-white/10 rounded-2xl overflow-hidden group">
             <div 
               className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-              style={{ backgroundImage: `url('/services/cloud_bg.jpg')` }}
+              style={{ backgroundImage: `url('/services/data_analysis_bg.jpg')` }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
             <div className="absolute inset-0 grid-pattern opacity-10" />
             <div className="absolute inset-0 p-4 flex flex-col justify-between z-10">
-              <span className="text-[8px] font-space text-white/50 tracking-wider">CLOUD_NODE_MONITOR // 100% OK</span>
-              <span className="text-[8px] font-space text-accent-cyan text-center uppercase font-bold tracking-widest bg-black/60 backdrop-blur-sm py-1.5 px-3 rounded-full border border-white/5 mx-auto">AWS_RDS_UPTIME_100</span>
+              <span className="text-[8px] font-space text-white/50 tracking-wider">DATABASE_ANALYTICS_CORE // 100% OK</span>
+              <span className="text-[8px] font-space text-accent-cyan text-center uppercase font-bold tracking-widest bg-black/60 backdrop-blur-sm py-1.5 px-3 rounded-full border border-white/5 mx-auto">TELEMETRY_ONLINE</span>
             </div>
           </div>
         </div>
@@ -106,10 +106,10 @@ export default function CloudSolutions() {
         {/* Services Cards Grid */}
         <div className="mb-20">
           <h3 className="font-space text-xs font-bold tracking-[0.2em] text-white/40 uppercase mb-8">
-            CLOUD ARCHITECTURE MODULES
+            DATA ENGINEERING MODULES
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {cloudServices.map((svc, idx) => {
+            {analysisServices.map((svc, idx) => {
               const Icon = svc.icon;
               return (
                 <div key={idx} className="bg-bg-card/40 border border-white/5 hover:border-accent-cyan/40 rounded-2xl p-6 transition-all duration-300">
@@ -132,18 +132,18 @@ export default function CloudSolutions() {
           </div>
         </div>
 
-        {/* Problems We Prevent */}
+        {/* Problems We Solve */}
         <div className="mb-20 border-t border-white/10 pt-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           <div className="md:col-span-4">
             <h3 className="font-space text-xs font-bold tracking-[0.2em] text-white/40 uppercase mb-2">
-              COST & SCALABILITY
+              KPI & ATTRIBUTION
             </h3>
             <h4 className="font-space text-lg font-bold text-white uppercase leading-normal">
-              PROBLEMS WE ACTIVELY TROUBLESHOOT & SOLVE
+              SYSTEM PROBLEMS WE PERMANENTLY RESOLVE
             </h4>
           </div>
           <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {problemsCloudSolves.map((problem, idx) => (
+            {problemsDataSolves.map((problem, idx) => (
               <div key={idx} className="flex gap-3 items-start text-xs font-sans text-white/70">
                 <Check className="w-4 h-4 text-accent-cyan shrink-0 mt-0.5" />
                 <span>{problem}</span>
@@ -152,20 +152,20 @@ export default function CloudSolutions() {
           </div>
         </div>
 
-        {/* Cloud Solutions CTA */}
+        {/* Data CTA */}
         <div className="border border-white/10 bg-bg-card/20 rounded-3xl p-8 text-center flex flex-col items-center gap-6 relative overflow-hidden">
           <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
           <h3 className="font-space text-xl font-bold text-white uppercase tracking-wider">
-            GET A CLOUD OPTIMIZATION AUDIT
+            GET A DATA SYSTEMS STRATEGY AUDIT
           </h3>
           <p className="text-white/60 text-sm max-w-xl leading-relaxed font-sans">
-            Reduce redundant resource spending and optimize your hosting security configuration. Reach out to set up an infrastructure strategy session today.
+            Reduce redundant storage spending and optimize query search speeds. Let's discuss your data systems infrastructure today.
           </p>
           <Link 
             href="/contact" 
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-space text-xs font-bold uppercase tracking-wider text-bg-deep bg-accent-cyan hover:bg-white hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300"
           >
-            Schedule Infrastructure Audit
+            Optimize Data Pipeline
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

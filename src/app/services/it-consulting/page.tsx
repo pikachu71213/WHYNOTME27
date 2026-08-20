@@ -88,13 +88,18 @@ export default function ITConsulting() {
             </p>
           </div>
           
-          {/* Visual placeholder */}
-          <div className="md:col-span-4 relative aspect-[4/3] w-full border border-white/10 bg-bg-card rounded-2xl p-4 flex flex-col justify-between grid-pattern-fine">
-            <span className="text-[8px] font-space text-white/30">STRATEGIC_MAP_MATRIX</span>
-            <div className="w-full flex justify-center py-6 text-white/20">
-              <Cpu className="w-8 h-8 text-accent-violet animate-pulse" />
+          {/* Visual background image with HUD overlays */}
+          <div className="md:col-span-4 relative aspect-[4/3] w-full border border-white/10 rounded-2xl overflow-hidden group">
+            <div 
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style={{ backgroundImage: `url('/services/consulting_bg.jpg')` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
+            <div className="absolute inset-0 grid-pattern opacity-10" />
+            <div className="absolute inset-0 p-4 flex flex-col justify-between z-10">
+              <span className="text-[8px] font-space text-white/50 tracking-wider">STRATEGIC_MAP_MATRIX // 100% OK</span>
+              <span className="text-[8px] font-space text-accent-violet text-center uppercase font-bold tracking-widest bg-black/60 backdrop-blur-sm py-1.5 px-3 rounded-full border border-white/5 mx-auto">COMPLIANCE_PASS</span>
             </div>
-            <span className="text-[8px] font-space text-accent-violet text-center uppercase font-bold">COMPLIANCE_PASS</span>
           </div>
         </div>
 

@@ -96,6 +96,18 @@ const services = [
     items: ["Tech Stack Audits", "Scalability Planning", "Vendor Assessments", "IT Budget Optimization"],
     href: "/services/it-consulting",
     bgImage: "/services/consulting_bg.jpg"
+  },
+  {
+    num: "07",
+    title: "Data Analytics",
+    icon: Database,
+    color: "#22D3EE", // Cyan
+    accentClass: "hover:border-accent-cyan/60 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]",
+    tagColor: "text-accent-cyan",
+    desc: "Optimizing database queries, building Extract-Transform-Load pipelines, and engineering Looker dashboards for business KPIs.",
+    items: ["Telemetry Engineering", "Database Latency Audits", "BI Dashboard Designs", "Conversion Attributions"],
+    href: "/services/data-analysis",
+    bgImage: "/services/data_analysis_bg.jpg"
   }
 ];
 
@@ -137,7 +149,53 @@ const insights = [
   }
 ];
 
+const bannerSlides = [
+  {
+    image: "/services/cybersecurity_bg.jpg",
+    title: "Cyber Security",
+    desc: "We protect your applications from modern cyber threats, run vulnerability penetration audits, and secure your code before attackers find the gaps.",
+    accent: "text-accent-violet",
+    tag: "SECURE // SHIELD_SYS",
+    titleLine1: "BUILDING DIGITAL",
+    titleLine2: "SYSTEMS THAT ARE",
+    titleHighlight: "SECURE BY DESIGN",
+    highlightClass: "text-accent-violet",
+    btnText: "Explore Security Solutions",
+    btnHref: "/services/cyber-security",
+    btnClass: "bg-accent-violet text-white hover:shadow-[0_0_25px_rgba(139,92,246,0.4)]"
+  },
+  {
+    image: "/services/devops_bg.jpg",
+    title: "DevOps Automation",
+    desc: "Continuous integration pipelines, automated environment deployments, Kubernetes container setups, and real-time infrastructure telemetry monitoring.",
+    accent: "text-accent-lime",
+    tag: "SCALE // BUILD_SYS",
+    titleLine1: "BUILDING DIGITAL",
+    titleLine2: "SYSTEMS THAT ARE",
+    titleHighlight: "AUTOMATED & SCALABLE",
+    highlightClass: "text-accent-lime",
+    btnText: "Explore DevOps Pipelines",
+    btnHref: "/services/devops",
+    btnClass: "bg-accent-lime text-bg-deep hover:shadow-[0_0_25px_rgba(199,255,61,0.4)]"
+  },
+  {
+    image: "/services/cloud_bg.jpg",
+    title: "Cloud Solutions",
+    desc: "Deploying multi-region high-availability server clusters, serverless database clusters, and cloud infrastructure cost reduction audits.",
+    accent: "text-accent-cyan",
+    tag: "AUTOMATE // CLOUD_SYS",
+    titleLine1: "BUILDING DIGITAL",
+    titleLine2: "SYSTEMS THAT ARE",
+    titleHighlight: "SCALABLE ON CLOUD",
+    highlightClass: "text-accent-cyan",
+    btnText: "Explore Cloud Solutions",
+    btnHref: "/services/cloud-solutions",
+    btnClass: "bg-accent-cyan text-bg-deep hover:shadow-[0_0_25px_rgba(34,211,238,0.4)]"
+  }
+];
+
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [logs, setLogs] = useState<string[]>([
     "initializing security layer...",
     "firewall ........ ONLINE",
@@ -145,6 +203,14 @@ export default function Home() {
     "encryption ........ ENABLED",
     "system status ..... SECURE"
   ]);
+
+  // Infinite sliding banner timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Terminal log simulator
   useEffect(() => {
@@ -178,104 +244,93 @@ export default function Home() {
       <div className="absolute top-[80vh] right-[10vw] w-[400px] h-[400px] bg-accent-cyan/5 blur-[100px] rounded-full pointer-events-none -z-10" />
 
       {/* --- HERO SECTION --- */}
-      <section className="relative min-h-[90vh] pt-32 pb-20 flex items-center justify-center">
-        <div className="max-w-7xl w-full mx-auto px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Text */}
-          <div className="lg:col-span-7 flex flex-col gap-6 text-left">
-            <div className="flex items-center gap-3">
-              <span className="px-3.5 py-1 rounded-full border border-white/10 bg-bg-card font-space text-[10px] tracking-[0.2em] font-semibold text-white/80 uppercase">
-                SECURE • SCALE • AUTOMATE
-              </span>
-              <span className="flex items-center gap-1.5 font-space text-[10px] tracking-wider text-accent-lime font-bold">
-                <span className="w-2 h-2 rounded-full bg-accent-lime animate-ping" />
-                SYSTEMS ONLINE
-              </span>
-            </div>
+      <section className="relative min-h-[90vh] pt-32 pb-20 flex items-center justify-center overflow-hidden">
+        
+        {/* Absolute right-side background slide image that blends into OLED black background */}
+        <div className="absolute top-0 bottom-0 right-0 left-0 pointer-events-none -z-10 overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, scale: 1.03 }}
+              animate={{ opacity: 0.9, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className="absolute inset-y-0 right-0 left-0 lg:left-[35%] bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${bannerSlides[currentSlide].image})` }}
+            />
+          </AnimatePresence>
+          {/* Double gradient overlay to blend into OLED black background (#050505) */}
+          <div className="absolute inset-0 bg-gradient-to-r from-bg-deep via-bg-deep/75 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-transparent to-transparent z-10" />
+          <div className="absolute inset-0 grid-pattern opacity-10 z-10" />
+        </div>
 
-            <h1 className="font-space text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1] uppercase">
-              BUILDING DIGITAL <br />
-              SYSTEMS THAT ARE <br />
-              <span className="text-accent-lime border-b border-accent-lime/30">SECURE BY DESIGN.</span>
-            </h1>
-
-            <p className="text-white/60 font-sans text-base md:text-lg leading-relaxed max-w-xl">
-              We build secure digital experiences, cloud infrastructure and automated technology solutions that help businesses scale faster and operate smarter.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4 mt-2">
-              <Link 
-                href="/services/cyber-security" 
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-space text-sm font-bold uppercase tracking-wider text-bg-deep bg-accent-lime hover:bg-white hover:shadow-[0_0_25px_rgba(199,255,61,0.5)] transition-all duration-300"
+        <div className="max-w-7xl w-full mx-auto px-6 md:px-8 relative z-10">
+          <div className="max-w-3xl flex flex-col gap-6 text-left">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="flex flex-col gap-6"
               >
-                Explore Solutions
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link 
-                href="/contact" 
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/15 bg-white/5 font-space text-sm font-bold uppercase tracking-wider text-white hover:bg-white hover:text-bg-deep transition-all duration-300"
-              >
-                Talk to an Expert
-              </Link>
-            </div>
+                {/* Badge details */}
+                <div className="flex items-center gap-3">
+                  <span className="px-3.5 py-1 rounded-full border border-white/10 bg-bg-card font-space text-[10px] tracking-[0.2em] font-semibold text-white/80 uppercase">
+                    {bannerSlides[currentSlide].tag}
+                  </span>
+                  <span className="flex items-center gap-1.5 font-space text-[10px] tracking-wider text-accent-lime font-bold">
+                    <span className="w-2 h-2 rounded-full bg-accent-lime animate-ping" />
+                    SYSTEMS ONLINE
+                  </span>
+                </div>
+
+                {/* Heading */}
+                <h1 className="font-space text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1] uppercase">
+                  {bannerSlides[currentSlide].titleLine1} <br />
+                  {bannerSlides[currentSlide].titleLine2} <br />
+                  <span className={bannerSlides[currentSlide].highlightClass}>
+                    {bannerSlides[currentSlide].titleHighlight}
+                  </span>
+                </h1>
+
+                {/* Description */}
+                <p className="text-white/60 font-sans text-base md:text-lg leading-relaxed max-w-xl">
+                  {bannerSlides[currentSlide].desc}
+                </p>
+
+                {/* Action Buttons */}
+                <div className="flex flex-wrap items-center gap-4 mt-2">
+                  <Link 
+                    href={bannerSlides[currentSlide].btnHref} 
+                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-space text-sm font-bold uppercase tracking-wider transition-all duration-300 ${bannerSlides[currentSlide].btnClass}`}
+                  >
+                    {bannerSlides[currentSlide].btnText}
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link 
+                    href="/contact" 
+                    className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/15 bg-white/5 font-space text-sm font-bold uppercase tracking-wider text-white hover:bg-white hover:text-bg-deep transition-all duration-300"
+                  >
+                    Talk to an Expert
+                  </Link>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
-
-          {/* Right Placeholder Visual */}
-          <div className="lg:col-span-5 w-full flex justify-center">
-            <div className="relative w-full aspect-square max-w-[420px] rounded-3xl border border-white/10 bg-bg-card/50 overflow-hidden flex flex-col justify-between p-6 grid-pattern-fine">
-              
-              {/* Top Details */}
-              <div className="flex justify-between items-start text-[10px] font-space text-white/40">
-                <div className="flex flex-col">
-                  <span>SYSTEM // CORE_INIT</span>
-                  <span className="text-accent-lime">OK // LIVE</span>
-                </div>
-                <span>40.7128° N, 74.0060° W</span>
-              </div>
-
-              {/* Central Abstract Radar/Crosshair Visual */}
-              <div className="relative w-full h-1/2 flex items-center justify-center">
-                <div className="absolute w-36 h-36 rounded-full border border-white/5 flex items-center justify-center animate-spin duration-3000">
-                  <div className="w-28 h-28 rounded-full border border-dashed border-white/10 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full border border-white/20" />
-                  </div>
-                  <div className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-accent-cyan/30 to-transparent" />
-                </div>
-                
-                {/* Cyber Crosshairs */}
-                <div className="absolute w-8 h-8 flex items-center justify-center text-white/40">
-                  <span className="absolute top-0 w-2 h-0.5 bg-accent-lime" />
-                  <span className="absolute bottom-0 w-2 h-0.5 bg-accent-lime" />
-                  <span className="absolute left-0 h-2 w-0.5 bg-accent-lime" />
-                  <span className="absolute right-0 h-2 w-0.5 bg-accent-lime" />
-                  <span className="text-[8px] font-space">WN_27</span>
-                </div>
-              </div>
-
-              {/* Bottom Details */}
-              <div className="flex justify-between items-end text-[10px] font-space text-white/40">
-                <div className="flex flex-col gap-0.5">
-                  <span>SCALE // R_100</span>
-                  <span className="text-accent-cyan">STABLE STATE</span>
-                </div>
-                <div className="text-right">
-                  <span>SECURE LAYER v3.8</span>
-                </div>
-              </div>
-
-              {/* Glowing Corner Accents */}
-              <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-accent-lime/40" />
-              <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-accent-lime/40" />
-              <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-accent-lime/40" />
-              <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-accent-lime/40" />
-            </div>
-          </div>
-          
         </div>
       </section>
 
       {/* --- TRUST / METRICS SECTION --- */}
-      <section className="relative py-12 border-y border-white/5 bg-bg-card/20 backdrop-blur-sm">
+      <motion.section 
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="relative py-12 border-y border-white/5 bg-bg-card/20 backdrop-blur-sm"
+      >
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 text-center">
             
@@ -317,7 +372,7 @@ export default function Home() {
 
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* --- SERVICES SECTION --- */}
       <section className="relative py-28 max-w-7xl mx-auto px-6 md:px-8">
@@ -333,11 +388,15 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((svc) => {
+          {services.map((svc, idx) => {
             const Icon = svc.icon;
             return (
               <Link href={svc.href} key={svc.num} className="block">
                 <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.08 }}
                   whileHover={{ y: -6 }}
                   className={`group relative rounded-2xl border border-white/5 bg-bg-card/40 p-8 h-full flex flex-col justify-between transition-all duration-300 cursor-pointer overflow-hidden ${svc.accentClass}`}
                 >
@@ -345,10 +404,10 @@ export default function Home() {
                   {svc.bgImage && (
                     <>
                       <div 
-                        className="absolute inset-0 bg-cover bg-center opacity-8 group-hover:opacity-15 transition-opacity duration-500 rounded-2xl"
+                        className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-45 transition-all duration-500 rounded-2xl mix-blend-screen"
                         style={{ backgroundImage: `url(${svc.bgImage})` }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-b from-bg-card/50 via-bg-card/90 to-bg-card rounded-2xl" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-bg-card/35 to-transparent rounded-2xl" />
                     </>
                   )}
 
