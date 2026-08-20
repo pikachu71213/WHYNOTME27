@@ -44,13 +44,13 @@ export default function Navbar() {
     >
       <div className="px-6 md:px-8 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-12 h-12 rounded-full overflow-hidden border border-white/20 bg-white shrink-0">
+        <Link href="/" className="flex items-center gap-3.5 group">
+          <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white/25 bg-white shrink-0">
             <Image
               src="/logo.png"
               alt="WHYNOT27 Logo"
               fill
-              className="object-cover p-1 transition-all duration-300 group-hover:scale-110"
+              className="object-cover p-0.5 transition-all duration-300 group-hover:scale-110"
             />
           </div>
           <span className="font-space font-bold tracking-wider text-base md:text-lg text-white group-hover:text-accent-lime transition-colors">

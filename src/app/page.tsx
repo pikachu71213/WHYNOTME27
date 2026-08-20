@@ -34,7 +34,8 @@ const services = [
     tagColor: "text-accent-violet",
     desc: "Vulnerability assessments, penetration testing, and security audits that find the gaps attackers look for — before they do.",
     items: ["OWASP Top 10 Audits", "Infrastructure Penetration Testing", "Security Code Reviews", "Compliance Readiness"],
-    href: "/services/cyber-security"
+    href: "/services/cyber-security",
+    bgImage: "/services/cybersecurity_bg.jpg"
   },
   {
     num: "02",
@@ -45,7 +46,8 @@ const services = [
     tagColor: "text-accent-lime",
     desc: "CI/CD pipelines, containerization, automated testing, deployment optimization, and real-time environment monitoring.",
     items: ["Docker & Kubernetes", "GitHub Actions / GitLab", "Infrastructure as Code", "Continuous Monitoring"],
-    href: "/services/devops"
+    href: "/services/devops",
+    bgImage: "/services/devops_bg.jpg"
   },
   {
     num: "03",
@@ -56,7 +58,8 @@ const services = [
     tagColor: "text-accent-cyan",
     desc: "Cloud architecture, migration, server infrastructure setup, elastic scaling, secure cloud endpoints, and optimization.",
     items: ["AWS & Azure Systems", "Cloud Migration Plans", "IAM & Access Hardening", "Serverless Infrastructure"],
-    href: "/services/cloud-solutions"
+    href: "/services/cloud-solutions",
+    bgImage: "/services/cloud_bg.jpg"
   },
   {
     num: "04",
@@ -67,7 +70,8 @@ const services = [
     tagColor: "text-accent-lime",
     desc: "Modern, responsive, conversion-focused websites and applications built with clean code and structures that scale.",
     items: ["React & Next.js Builds", "E-Commerce Engines", "Custom Web Dashboards", "SEO & Performance Tuning"],
-    href: "/services/web-development"
+    href: "/services/web-development",
+    bgImage: "/services/webdev_bg.jpg"
   },
   {
     num: "05",
@@ -78,7 +82,8 @@ const services = [
     tagColor: "text-accent-cyan",
     desc: "SEO, paid campaigns, social media, and conversion rate optimization engineered around measurable ROI, not vanity metrics.",
     items: ["Technical SEO audits", "Performance Paid Ads", "Conversion Rate Optimization", "Dashboard Attribution"],
-    href: "/services/digital-marketing"
+    href: "/services/digital-marketing",
+    bgImage: "/services/marketing_bg.jpg"
   },
   {
     num: "06",
@@ -89,7 +94,8 @@ const services = [
     tagColor: "text-accent-violet",
     desc: "Technology roadmapping, infrastructure planning, security compliance architecture, and digital transformation consulting.",
     items: ["Tech Stack Audits", "Scalability Planning", "Vendor Assessments", "IT Budget Optimization"],
-    href: "/services/it-consulting"
+    href: "/services/it-consulting",
+    bgImage: "/services/consulting_bg.jpg"
   }
 ];
 
@@ -333,9 +339,20 @@ export default function Home() {
               <Link href={svc.href} key={svc.num} className="block">
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className={`group relative rounded-2xl border border-white/5 bg-bg-card/40 p-8 h-full flex flex-col justify-between transition-all duration-300 cursor-pointer ${svc.accentClass}`}
+                  className={`group relative rounded-2xl border border-white/5 bg-bg-card/40 p-8 h-full flex flex-col justify-between transition-all duration-300 cursor-pointer overflow-hidden ${svc.accentClass}`}
                 >
-                  <div>
+                  {/* Holographic background image with overlay */}
+                  {svc.bgImage && (
+                    <>
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center opacity-8 group-hover:opacity-15 transition-opacity duration-500 rounded-2xl"
+                        style={{ backgroundImage: `url(${svc.bgImage})` }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-b from-bg-card/50 via-bg-card/90 to-bg-card rounded-2xl" />
+                    </>
+                  )}
+
+                  <div className="relative z-10">
                     {/* Card Header metadata */}
                     <div className="flex justify-between items-center mb-6">
                       <span className="font-space text-xs text-white/30 tracking-widest">{svc.num} // CORE_SYS</span>
@@ -346,16 +363,16 @@ export default function Home() {
                     <h3 className="font-space text-lg font-bold text-white mb-3 group-hover:text-white uppercase flex items-center gap-2">
                       {svc.title}
                     </h3>
-                    <p className="text-white/50 text-sm leading-relaxed mb-6 font-sans">
+                    <p className="text-white/60 text-sm leading-relaxed mb-6 font-sans">
                       {svc.desc}
                     </p>
                   </div>
 
                   {/* Sub items */}
-                  <div className="border-t border-white/5 pt-5 mt-auto">
+                  <div className="border-t border-white/5 pt-5 mt-auto relative z-10">
                     <ul className="flex flex-col gap-2">
                       {svc.items.map((item, idx) => (
-                        <li key={idx} className="flex items-center gap-2 text-xs font-space text-white/60">
+                        <li key={idx} className="flex items-center gap-2 text-xs font-space text-white/70">
                           <span className={`w-1 h-1 rounded-full ${svc.num === "01" || svc.num === "06" ? "bg-accent-violet" : svc.num === "02" || svc.num === "04" ? "bg-accent-lime" : "bg-accent-cyan"}`} />
                           {item}
                         </li>
@@ -364,7 +381,7 @@ export default function Home() {
                   </div>
 
                   {/* Glowing subtle edge accent */}
-                  <div className="absolute top-0 right-10 left-10 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:via-white/20 transition-all duration-300" />
+                  <div className="absolute top-0 right-10 left-10 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:via-white/20 transition-all duration-300 z-20" />
                 </motion.div>
               </Link>
             );

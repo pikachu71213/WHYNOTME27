@@ -12,13 +12,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-8 pb-16">
           {/* Logo & Vibe */}
           <div className="md:col-span-2 flex flex-col gap-6">
-            <Link href="/" className="flex items-center gap-3 group w-fit">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden border border-white/20 bg-white shrink-0">
+            <Link href="/" className="flex items-center gap-3.5 group w-fit">
+              <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white/25 bg-white shrink-0">
                 <Image
                   src="/logo.png"
                   alt="WHYNOT27 Logo"
                   fill
-                  className="object-cover p-1 transition-transform group-hover:scale-110"
+                  className="object-cover p-0.5 transition-transform group-hover:scale-110"
                 />
               </div>
               <span className="font-space font-bold tracking-wider text-lg text-white">
