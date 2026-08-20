@@ -208,7 +208,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
-    }, 4000);
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
@@ -247,7 +247,7 @@ export default function Home() {
       <section className="relative min-h-[90vh] pt-32 pb-20 flex items-center justify-center overflow-hidden">
         
         {/* Absolute right-side background slide image that blends into OLED black background */}
-        <div className="absolute top-0 bottom-0 right-0 left-0 pointer-events-none -z-10 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
@@ -259,13 +259,15 @@ export default function Home() {
               style={{ backgroundImage: `url(${bannerSlides[currentSlide].image})` }}
             />
           </AnimatePresence>
+          {/* Mobile dark lens layer */}
+          <div className="absolute inset-0 bg-black/60 lg:bg-transparent z-10 pointer-events-none" />
           {/* Double gradient overlay to blend into OLED black background (#050505) */}
           <div className="absolute inset-0 bg-gradient-to-r from-bg-deep via-bg-deep/75 to-transparent z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-transparent to-transparent z-10" />
           <div className="absolute inset-0 grid-pattern opacity-10 z-10" />
         </div>
 
-        <div className="max-w-7xl w-full mx-auto px-6 md:px-8 relative z-10">
+        <div className="max-w-7xl w-full mx-auto px-6 md:px-8 relative z-20">
           <div className="max-w-3xl flex flex-col gap-6 text-left">
             <AnimatePresence mode="wait">
               <motion.div
@@ -387,18 +389,23 @@ export default function Home() {
           <div className="w-12 h-1 bg-accent-lime/60 rounded" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {services.map((svc, idx) => {
             const Icon = svc.icon;
+            const isLastCard = idx === services.length - 1;
             return (
-              <Link href={svc.href} key={svc.num} className="block">
+              <Link 
+                href={svc.href} 
+                key={svc.num} 
+                className={`block col-span-1 ${isLastCard ? "lg:col-start-2" : ""}`}
+              >
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: idx * 0.08 }}
                   whileHover={{ y: -6 }}
-                  className={`group relative rounded-2xl border border-white/5 bg-bg-card/40 p-8 h-full flex flex-col justify-between transition-all duration-300 cursor-pointer overflow-hidden ${svc.accentClass}`}
+                  className={`group relative rounded-2xl border border-white/5 bg-bg-card/40 p-5 sm:p-8 h-full flex flex-col justify-between transition-all duration-300 cursor-pointer overflow-hidden ${svc.accentClass}`}
                 >
                   {/* Holographic background image with overlay */}
                   {svc.bgImage && (

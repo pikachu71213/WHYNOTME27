@@ -17,29 +17,32 @@ export default async function Icon() {
 
   return new ImageResponse(
     (
-      <div
+      <svg
+        width="512"
+        height="512"
+        viewBox="0 0 512 512"
         style={{
+          display: "flex",
           width: "100%",
           height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "white",
-          borderRadius: "50%",
-          overflow: "hidden",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={srcUrl}
-          alt="WHYNOT27"
-          style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "50%",
-          }}
-        />
-      </div>
+        <defs>
+          <clipPath id="circleView">
+            <circle cx="256" cy="256" r="256" />
+          </clipPath>
+        </defs>
+        <g clipPath="url(#circleView)">
+          <image
+            href={srcUrl}
+            x="0"
+            y="0"
+            width="512"
+            height="512"
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </g>
+      </svg>
     ),
     {
       ...size,

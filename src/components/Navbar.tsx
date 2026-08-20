@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const serviceLinks = [
   { name: "Cyber Security Testing", href: "/services/cyber-security" },
@@ -21,6 +22,7 @@ const serviceLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -138,7 +140,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 mt-3 bg-bg-deep/95 border border-white/10 rounded-3xl p-6 backdrop-blur-lg shadow-2xl flex flex-col gap-6 animate-in fade-in slide-in-from-top-5 duration-200">
+        <div className="md:hidden absolute top-full left-0 right-0 mt-3 bg-bg-deep/95 border border-white/10 rounded-3xl p-6 pb-8 backdrop-blur-lg shadow-2xl flex flex-col gap-6 max-h-[calc(100dvh-130px)] overflow-y-auto animate-in fade-in slide-in-from-top-5 duration-200">
           <div className="flex flex-col gap-4">
             <Link
               onClick={() => setIsOpen(false)}
@@ -150,24 +152,43 @@ export default function Navbar() {
               Home
             </Link>
             
-            <div className="border-t border-white/5 pt-2">
-              <span className="text-xs font-space uppercase tracking-wider text-white/50 block mb-3">
-                Our Services
-              </span>
-              <div className="flex flex-col gap-3 pl-3">
-                {serviceLinks.map((service) => (
-                  <Link
-                    key={service.href}
-                    onClick={() => setIsOpen(false)}
-                    href={service.href}
-                    className={`text-sm font-medium transition-colors ${
-                      pathname === service.href ? "text-accent-lime" : "text-white/80 hover:text-accent-lime"
-                    }`}
+            {/* Collapsible Mobile Services Dropdown */}
+            <div className="border-t border-white/5 pt-3">
+              <button
+                onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                className="flex items-center justify-between w-full text-base font-semibold text-white focus:outline-none"
+              >
+                <span>Services</span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileServicesOpen ? "rotate-180" : ""}`} />
+              </button>
+              
+              <AnimatePresence>
+                {isMobileServicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden flex flex-col gap-3 pl-4 pt-3 mt-1 border-l border-white/5"
                   >
-                    {service.name}
-                  </Link>
-                ))}
-              </div>
+                    {serviceLinks.map((service) => (
+                      <Link
+                        key={service.href}
+                        onClick={() => {
+                          setIsOpen(false);
+                          setIsMobileServicesOpen(false);
+                        }}
+                        href={service.href}
+                        className={`text-sm font-medium transition-colors ${
+                          pathname === service.href ? "text-accent-lime" : "text-white/80 hover:text-accent-lime"
+                        }`}
+                      >
+                        {service.name}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <Link
@@ -202,7 +223,7 @@ export default function Navbar() {
           <Link
             onClick={() => setIsOpen(false)}
             href="/contact"
-            className="w-full text-center py-3 rounded-full font-space text-sm font-bold uppercase tracking-wider text-bg-deep bg-accent-lime hover:bg-white transition-colors"
+            className="w-full text-center py-3 rounded-full font-space text-sm font-bold uppercase tracking-wider text-bg-deep bg-accent-lime hover:bg-white transition-colors shrink-0"
           >
             Start a Project
           </Link>
