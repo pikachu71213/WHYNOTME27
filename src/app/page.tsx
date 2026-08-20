@@ -1,69 +1,1058 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Shield, 
+  Cpu, 
+  Cloud, 
+  Code, 
+  TrendingUp, 
+  HelpCircle, 
+  ArrowRight, 
+  Terminal as TerminalIcon, 
+  Server, 
+  Activity, 
+  Database,
+  ArrowUpRight, 
+  CheckCircle2, 
+  Layers, 
+  Zap, 
+  Lock, 
+  RefreshCw 
+} from "lucide-react";
+
+// Mock Data
+const services = [
+  {
+    num: "01",
+    title: "Cyber Security",
+    icon: Shield,
+    color: "#8B5CF6", // Violet
+    accentClass: "hover:border-accent-violet/60 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]",
+    tagColor: "text-accent-violet",
+    desc: "Vulnerability assessments, penetration testing, and security audits that find the gaps attackers look for — before they do.",
+    items: ["OWASP Top 10 Audits", "Infrastructure Penetration Testing", "Security Code Reviews", "Compliance Readiness"],
+    href: "/services/cyber-security"
+  },
+  {
+    num: "02",
+    title: "DevOps Automation",
+    icon: TerminalIcon,
+    color: "#C7FF3D", // Lime
+    accentClass: "hover:border-accent-lime/60 hover:shadow-[0_0_30px_rgba(199,255,61,0.15)]",
+    tagColor: "text-accent-lime",
+    desc: "CI/CD pipelines, containerization, automated testing, deployment optimization, and real-time environment monitoring.",
+    items: ["Docker & Kubernetes", "GitHub Actions / GitLab", "Infrastructure as Code", "Continuous Monitoring"],
+    href: "/services/devops"
+  },
+  {
+    num: "03",
+    title: "Cloud Solutions",
+    icon: Cloud,
+    color: "#22D3EE", // Cyan
+    accentClass: "hover:border-accent-cyan/60 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]",
+    tagColor: "text-accent-cyan",
+    desc: "Cloud architecture, migration, server infrastructure setup, elastic scaling, secure cloud endpoints, and optimization.",
+    items: ["AWS & Azure Systems", "Cloud Migration Plans", "IAM & Access Hardening", "Serverless Infrastructure"],
+    href: "/services/cloud-solutions"
+  },
+  {
+    num: "04",
+    title: "Web Development",
+    icon: Code,
+    color: "#C7FF3D", // Lime
+    accentClass: "hover:border-accent-lime/60 hover:shadow-[0_0_30px_rgba(199,255,61,0.15)]",
+    tagColor: "text-accent-lime",
+    desc: "Modern, responsive, conversion-focused websites and applications built with clean code and structures that scale.",
+    items: ["React & Next.js Builds", "E-Commerce Engines", "Custom Web Dashboards", "SEO & Performance Tuning"],
+    href: "/services/web-development"
+  },
+  {
+    num: "05",
+    title: "Digital Marketing",
+    icon: TrendingUp,
+    color: "#22D3EE", // Cyan
+    accentClass: "hover:border-accent-cyan/60 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]",
+    tagColor: "text-accent-cyan",
+    desc: "SEO, paid campaigns, social media, and conversion rate optimization engineered around measurable ROI, not vanity metrics.",
+    items: ["Technical SEO audits", "Performance Paid Ads", "Conversion Rate Optimization", "Dashboard Attribution"],
+    href: "/services/digital-marketing"
+  },
+  {
+    num: "06",
+    title: "IT Consulting",
+    icon: Cpu,
+    color: "#8B5CF6", // Violet
+    accentClass: "hover:border-accent-violet/60 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]",
+    tagColor: "text-accent-violet",
+    desc: "Technology roadmapping, infrastructure planning, security compliance architecture, and digital transformation consulting.",
+    items: ["Tech Stack Audits", "Scalability Planning", "Vendor Assessments", "IT Budget Optimization"],
+    href: "/services/it-consulting"
+  }
+];
+
+const steps = [
+  { num: "01", name: "DISCOVER", desc: "We audit your current site, infrastructure, and marketing to find quick wins and hidden risks." },
+  { num: "02", name: "STRATEGIZE", desc: "Our engineers design a technology roadmap, cloud structure, and conversion strategy aligned with your targets." },
+  { num: "03", name: "BUILD", desc: "Developers and designers build on modern, scalable stacks like React and Next.js, hosted on secure infrastructure." },
+  { num: "04", name: "SECURE", desc: "Our security testers penetration-test every deliverable, checking for OWASP Top 10 and server misconfigurations." },
+  { num: "05", name: "SCALE", desc: "We deploy optimization cycles, monitor infrastructure, and run paid/organic campaigns to compound traffic." }
+];
+
+const projects = [
+  { id: 1, title: "Cybersecurity Platform", category: "Vulnerability Scanner", desc: "Automated network surface penetration test engine for SaaS providers." },
+  { id: 2, title: "Cloud Infrastructure", category: "DevOps & AWS Setup", desc: "Highly available server cluster supporting 50k+ requests per second." },
+  { id: 3, title: "Business Web App", category: "React & Next.js Build", desc: "Speed-optimized custom client portal featuring interactive analytics." },
+  { id: 4, title: "Digital Growth Platform", category: "Performance Marketing", desc: "Attribution and conversion funnel setup with verified organic scaling." }
+];
+
+const techList = [
+  "AWS", "Azure", "Docker", "Linux", "Python", "React", "Node.js", "MongoDB", "Git", "GitHub", "Cloudflare", "Nginx", "Kubernetes",
+  "AWS", "Azure", "Docker", "Linux", "Python", "React", "Node.js", "MongoDB", "Git", "GitHub", "Cloudflare", "Nginx", "Kubernetes"
+];
+
+const insights = [
+  {
+    tag: "SECURITY",
+    title: "How Modern Businesses Should Approach Cybersecurity",
+    desc: "Why perimeter security is dead and zero-trust framework models are the baseline requirement in 2026."
+  },
+  {
+    tag: "DEVOPS",
+    title: "Why DevOps Automation Matters for Scaling",
+    desc: "How manual deployments drain engineering speed and why unified pipelines keep systems reliable."
+  },
+  {
+    tag: "CLOUD",
+    title: "Building Secure Cloud Infrastructure",
+    desc: "A developer's checklist for configuring IAM roles, blocking open ports, and securing serverless databases."
+  }
+];
 
 export default function Home() {
+  const [logs, setLogs] = useState<string[]>([
+    "initializing security layer...",
+    "firewall ........ ONLINE",
+    "threat detection . ACTIVE",
+    "encryption ........ ENABLED",
+    "system status ..... SECURE"
+  ]);
+
+  // Terminal log simulator
+  useEffect(() => {
+    const processSteps = [
+      "checking ports ... [CLOSED]",
+      "scanning dependencies ... [OK]",
+      "monitoring active node connections...",
+      "securing SSH endpoints ... [DONE]",
+      "analyzing firewall rule integrity...",
+      "load balancer state ... [100% HEALTH]",
+      "IDS systems running ... [ACTIVE]"
+    ];
+
+    const interval = setInterval(() => {
+      const randomLine = processSteps[Math.floor(Math.random() * processSteps.length)];
+      setLogs((prev) => {
+        const updated = [...prev.slice(1), randomLine];
+        return updated;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="relative w-full bg-bg-deep overflow-hidden">
+      
+      {/* Decorative Grid Backgrounds */}
+      <div className="absolute inset-0 grid-pattern opacity-40 pointer-events-none -z-20" />
+      <div className="absolute top-[30vh] left-[20vw] w-[500px] h-[500px] bg-accent-violet/5 blur-[120px] rounded-full pointer-events-none -z-10 animate-pulse duration-10000" />
+      <div className="absolute top-[80vh] right-[10vw] w-[400px] h-[400px] bg-accent-cyan/5 blur-[100px] rounded-full pointer-events-none -z-10" />
+
+      {/* --- HERO SECTION --- */}
+      <section className="relative min-h-[90vh] pt-32 pb-20 flex items-center justify-center">
+        <div className="max-w-7xl w-full mx-auto px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Text */}
+          <div className="lg:col-span-7 flex flex-col gap-6 text-left">
+            <div className="flex items-center gap-3">
+              <span className="px-3.5 py-1 rounded-full border border-white/10 bg-bg-card font-space text-[10px] tracking-[0.2em] font-semibold text-white/80 uppercase">
+                SECURE • SCALE • AUTOMATE
+              </span>
+              <span className="flex items-center gap-1.5 font-space text-[10px] tracking-wider text-accent-lime font-bold">
+                <span className="w-2 h-2 rounded-full bg-accent-lime animate-ping" />
+                SYSTEMS ONLINE
+              </span>
+            </div>
+
+            <h1 className="font-space text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1] uppercase">
+              BUILDING DIGITAL <br />
+              SYSTEMS THAT ARE <br />
+              <span className="text-accent-lime border-b border-accent-lime/30">SECURE BY DESIGN.</span>
+            </h1>
+
+            <p className="text-white/60 font-sans text-base md:text-lg leading-relaxed max-w-xl">
+              We build secure digital experiences, cloud infrastructure and automated technology solutions that help businesses scale faster and operate smarter.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 mt-2">
+              <Link 
+                href="/services/cyber-security" 
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-space text-sm font-bold uppercase tracking-wider text-bg-deep bg-accent-lime hover:bg-white hover:shadow-[0_0_25px_rgba(199,255,61,0.5)] transition-all duration-300"
+              >
+                Explore Solutions
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link 
+                href="/contact" 
+                className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/15 bg-white/5 font-space text-sm font-bold uppercase tracking-wider text-white hover:bg-white hover:text-bg-deep transition-all duration-300"
+              >
+                Talk to an Expert
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Placeholder Visual */}
+          <div className="lg:col-span-5 w-full flex justify-center">
+            <div className="relative w-full aspect-square max-w-[420px] rounded-3xl border border-white/10 bg-bg-card/50 overflow-hidden flex flex-col justify-between p-6 grid-pattern-fine">
+              
+              {/* Top Details */}
+              <div className="flex justify-between items-start text-[10px] font-space text-white/40">
+                <div className="flex flex-col">
+                  <span>SYSTEM // CORE_INIT</span>
+                  <span className="text-accent-lime">OK // LIVE</span>
+                </div>
+                <span>40.7128° N, 74.0060° W</span>
+              </div>
+
+              {/* Central Abstract Radar/Crosshair Visual */}
+              <div className="relative w-full h-1/2 flex items-center justify-center">
+                <div className="absolute w-36 h-36 rounded-full border border-white/5 flex items-center justify-center animate-spin duration-3000">
+                  <div className="w-28 h-28 rounded-full border border-dashed border-white/10 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full border border-white/20" />
+                  </div>
+                  <div className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-accent-cyan/30 to-transparent" />
+                </div>
+                
+                {/* Cyber Crosshairs */}
+                <div className="absolute w-8 h-8 flex items-center justify-center text-white/40">
+                  <span className="absolute top-0 w-2 h-0.5 bg-accent-lime" />
+                  <span className="absolute bottom-0 w-2 h-0.5 bg-accent-lime" />
+                  <span className="absolute left-0 h-2 w-0.5 bg-accent-lime" />
+                  <span className="absolute right-0 h-2 w-0.5 bg-accent-lime" />
+                  <span className="text-[8px] font-space">WN_27</span>
+                </div>
+              </div>
+
+              {/* Bottom Details */}
+              <div className="flex justify-between items-end text-[10px] font-space text-white/40">
+                <div className="flex flex-col gap-0.5">
+                  <span>SCALE // R_100</span>
+                  <span className="text-accent-cyan">STABLE STATE</span>
+                </div>
+                <div className="text-right">
+                  <span>SECURE LAYER v3.8</span>
+                </div>
+              </div>
+
+              {/* Glowing Corner Accents */}
+              <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-accent-lime/40" />
+              <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-accent-lime/40" />
+              <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-accent-lime/40" />
+              <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-accent-lime/40" />
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+      {/* --- TRUST / METRICS SECTION --- */}
+      <section className="relative py-12 border-y border-white/5 bg-bg-card/20 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 text-center">
+            
+            <div className="flex flex-col gap-1.5">
+              <span className="font-space text-3xl md:text-4xl font-bold tracking-tight text-accent-lime">
+                99.9%
+              </span>
+              <span className="text-white/60 text-xs font-space uppercase tracking-wider">
+                System Uptime
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-1.5 border-l border-white/5">
+              <span className="font-space text-3xl md:text-4xl font-bold tracking-tight text-white">
+                24/7
+              </span>
+              <span className="text-white/60 text-xs font-space uppercase tracking-wider">
+                Security Monitoring
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-1.5 border-l border-white/5">
+              <span className="font-space text-3xl md:text-4xl font-bold tracking-tight text-accent-cyan">
+                Enterprise
+              </span>
+              <span className="text-white/60 text-xs font-space uppercase tracking-wider">
+                Cloud Architectures
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-1.5 border-l border-white/5">
+              <span className="font-space text-3xl md:text-4xl font-bold tracking-tight text-white">
+                Zero
+              </span>
+              <span className="text-white/60 text-xs font-space uppercase tracking-wider">
+                Trust Hardening
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* --- SERVICES SECTION --- */}
+      <section className="relative py-28 max-w-7xl mx-auto px-6 md:px-8">
+        
+        <div className="flex flex-col gap-4 mb-16 text-left">
+          <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-lime">
+            OUR CORE EXPERTISE
+          </span>
+          <h2 className="font-space text-3xl md:text-4xl font-bold text-white uppercase">
+            WHAT WE BUILD
+          </h2>
+          <div className="w-12 h-1 bg-accent-lime/60 rounded" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((svc) => {
+            const Icon = svc.icon;
+            return (
+              <Link href={svc.href} key={svc.num} className="block">
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className={`group relative rounded-2xl border border-white/5 bg-bg-card/40 p-8 h-full flex flex-col justify-between transition-all duration-300 cursor-pointer ${svc.accentClass}`}
+                >
+                  <div>
+                    {/* Card Header metadata */}
+                    <div className="flex justify-between items-center mb-6">
+                      <span className="font-space text-xs text-white/30 tracking-widest">{svc.num} // CORE_SYS</span>
+                      <Icon className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
+                    </div>
+                    
+                    {/* Title & Description */}
+                    <h3 className="font-space text-lg font-bold text-white mb-3 group-hover:text-white uppercase flex items-center gap-2">
+                      {svc.title}
+                    </h3>
+                    <p className="text-white/50 text-sm leading-relaxed mb-6 font-sans">
+                      {svc.desc}
+                    </p>
+                  </div>
+
+                  {/* Sub items */}
+                  <div className="border-t border-white/5 pt-5 mt-auto">
+                    <ul className="flex flex-col gap-2">
+                      {svc.items.map((item, idx) => (
+                        <li key={idx} className="flex items-center gap-2 text-xs font-space text-white/60">
+                          <span className={`w-1 h-1 rounded-full ${svc.num === "01" || svc.num === "06" ? "bg-accent-violet" : svc.num === "02" || svc.num === "04" ? "bg-accent-lime" : "bg-accent-cyan"}`} />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Glowing subtle edge accent */}
+                  <div className="absolute top-0 right-10 left-10 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:via-white/20 transition-all duration-300" />
+                </motion.div>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* --- CYBERSECURITY FEATURE SECTION --- */}
+      <section className="relative py-28 border-t border-white/5 bg-bg-card/10">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          
+          {/* Left Text */}
+          <div className="lg:col-span-6 flex flex-col gap-6">
+            <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-violet">
+              SECURITY INTEGRITY
+            </span>
+            <h2 className="font-space text-3xl md:text-5xl font-bold text-white leading-tight uppercase">
+              SECURITY IS NOT A FEATURE.<br />
+              IT'S THE FOUNDATION.
+            </h2>
+            <p className="text-white/60 font-sans text-sm md:text-base leading-relaxed">
+              Every system, API integration, and web app we ship undergoes comprehensive hardening checks. We simulate advanced external vectors before release to make sure security resides in your code structure, not a firewall add-on.
+            </p>
+
+            <div className="grid grid-cols-2 gap-4 mt-2">
+              {[
+                "Threat Detection",
+                "Vulnerability Assessment",
+                "Web Security Hardening",
+                "Network Security Audit",
+                "Security Code Reviews",
+                "Compliance & Risk Mapping"
+              ].map((feat, idx) => (
+                <div key={idx} className="flex items-center gap-2 text-xs font-space text-white/80">
+                  <CheckCircle2 className="w-4 h-4 text-accent-violet" />
+                  {feat}
+                </div>
+              ))}
+            </div>
+
+            {/* Simulated Live Terminal UI */}
+            <div className="w-full mt-6 rounded-2xl border border-white/10 bg-black/80 p-5 font-mono text-xs text-white/80 shadow-2xl relative">
+              {/* Window Header */}
+              <div className="flex justify-between items-center border-b border-white/10 pb-3 mb-3">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                </div>
+                <span className="text-[10px] text-white/40 tracking-wider font-space uppercase">SEC_LOG_SYS</span>
+              </div>
+              {/* Logs */}
+              <div className="flex flex-col gap-1.5">
+                {logs.map((log, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <span className="text-accent-violet font-bold">&gt;</span>
+                    <span className={log.includes("SECURE") || log.includes("ONLINE") || log.includes("ACTIVE") ? "text-accent-lime" : "text-white/80"}>
+                      {log}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="absolute bottom-2 right-4 flex items-center gap-1 text-[8px] text-white/30 uppercase tracking-widest">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-lime animate-pulse" />
+                ACTIVE SHIELD
+              </div>
+            </div>
+          </div>
+
+          {/* Right cybersecurity visual placeholder */}
+          <div className="lg:col-span-6 w-full flex justify-center">
+            <div className="relative w-full aspect-[4/3] rounded-3xl border border-white/10 bg-bg-card/40 flex flex-col justify-between p-6 grid-pattern overflow-hidden">
+              <div className="flex justify-between text-[10px] font-space text-white/30">
+                <span>VAPT_MODULE_ACTIVE</span>
+                <span>STATUS: TESTING</span>
+              </div>
+              
+              <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-center my-6">
+                <div className="w-16 h-16 rounded-full border border-dashed border-accent-violet flex items-center justify-center animate-spin duration-5000">
+                  <Lock className="w-6 h-6 text-accent-violet" />
+                </div>
+                <span className="font-space text-xs font-bold tracking-widest text-white/70">
+                  [BLANK_SEC_ARTWORK_PLACEHOLDER]
+                </span>
+                <span className="text-[9px] font-space text-white/40 max-w-[280px]">
+                  Visual block reserved for upcoming network vulnerability vector diagrams.
+                </span>
+              </div>
+
+              <div className="flex justify-between text-[10px] font-space text-white/30">
+                <span>COORDS // [x:98.2, y:12.7]</span>
+                <span className="text-accent-violet font-bold">SECURE_AGENT_READY</span>
+              </div>
+
+              <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-accent-violet/50" />
+              <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-accent-violet/50" />
+              <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-accent-violet/50" />
+              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-accent-violet/50" />
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* --- DEVOPS + CLOUD SECTION --- */}
+      <section className="relative py-28 max-w-7xl mx-auto px-6 md:px-8 border-t border-white/5">
+        <div className="flex flex-col gap-4 mb-16 text-left">
+          <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-cyan">
+            AUTOMATED INTEGRATION
+          </span>
+          <h2 className="font-space text-3xl md:text-4xl font-bold text-white uppercase">
+            FROM CODE TO CLOUD.
+          </h2>
+          <div className="w-12 h-1 bg-accent-cyan/60 rounded" />
+        </div>
+
+        {/* Workflow path */}
+        <div className="w-full grid grid-cols-2 md:grid-cols-6 gap-6 mb-16">
+          {[
+            { step: "CODE", desc: "Version Control", color: "text-white" },
+            { step: "BUILD", desc: "Docker Images", color: "text-accent-violet" },
+            { step: "TEST", desc: "Automated Checklists", color: "text-white" },
+            { step: "DEPLOY", desc: "AWS Infrastructure", color: "text-accent-lime" },
+            { step: "MONITOR", desc: "Continuous Metrics", color: "text-white" },
+            { step: "SCALE", desc: "Elastic Load Balance", color: "text-accent-cyan" }
+          ].map((flow, idx) => (
+            <div key={idx} className="relative bg-bg-card/50 border border-white/5 rounded-2xl p-6 flex flex-col items-center justify-center text-center group hover:border-white/20 transition-all duration-300">
+              <span className="font-space text-[10px] text-white/30 mb-2">STAGE 0{idx + 1}</span>
+              <span className={`font-space text-sm font-bold tracking-widest ${flow.color} mb-1`}>{flow.step}</span>
+              <span className="font-sans text-[10px] text-white/50">{flow.desc}</span>
+              
+              {/* Connector line (desktop only) */}
+              {idx < 5 && (
+                <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-[1px] bg-white/10 z-10" />
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          {/* Left Visual Placeholder */}
+          <div className="lg:col-span-6 w-full flex justify-center order-2 lg:order-1">
+            <div className="relative w-full aspect-[4/3] rounded-3xl border border-white/10 bg-bg-card/40 flex flex-col justify-between p-6 grid-pattern overflow-hidden">
+              <div className="flex justify-between text-[10px] font-space text-white/30">
+                <span>INFRASTRUCTURE // SCHEMA</span>
+                <span>VER: 4.8.1</span>
+              </div>
+              
+              <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-center my-6">
+                <div className="w-16 h-16 rounded-full border border-dashed border-accent-cyan flex items-center justify-center animate-pulse">
+                  <Database className="w-6 h-6 text-accent-cyan" />
+                </div>
+                <span className="font-space text-xs font-bold tracking-widest text-white/70">
+                  [BLANK_CLOUD_INFRASTRUCTURE_PLACEHOLDER]
+                </span>
+                <span className="text-[9px] font-space text-white/40 max-w-[280px]">
+                  Space allocated for upcoming cloud architecture diagrams, load balancer schematics, and Docker mapping files.
+                </span>
+              </div>
+
+              <div className="flex justify-between text-[10px] font-space text-white/30">
+                <span>DEPLOY: AUTO</span>
+                <span className="text-accent-cyan font-bold">AWS_ACTIVE</span>
+              </div>
+
+              <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-accent-cyan/50" />
+              <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-accent-cyan/50" />
+              <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-accent-cyan/50" />
+              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-accent-cyan/50" />
+            </div>
+          </div>
+
+          {/* Right Text */}
+          <div className="lg:col-span-6 flex flex-col gap-6 order-1 lg:order-2">
+            <h3 className="font-space text-2xl md:text-3xl font-bold text-white uppercase">
+              RELIABLE INFRASTRUCTURE ON DEMAND
+            </h3>
+            <p className="text-white/60 font-sans text-sm md:text-base leading-relaxed">
+              We automate everything between writing your code and serving it to your global audiences. Using custom CI/CD pipelines, Docker containerized architectures, and AWS load balancing, your platform remains online, patched, and fast.
+            </p>
+
+            <ul className="flex flex-col gap-3 font-space text-xs text-white/80">
+              {[
+                { title: "Cloud Infrastructure Setup", desc: "EC2 clustering, AWS S3 storage configurations, and managed cloud DB setups." },
+                { title: "CI/CD Deployment Automation", desc: "Zero-downtime deployment pipelines that release features automatically upon validation." },
+                { title: "Monitoring & Server Hardening", desc: "Automated daily backups, resource warnings, and port audits configuration." }
+              ].map((item, idx) => (
+                <li key={idx} className="flex gap-3 items-start border-l border-accent-cyan pl-4 py-1.5">
+                  <div>
+                    <span className="font-bold uppercase tracking-wider block text-white">{item.title}</span>
+                    <span className="text-white/50 text-[11px] font-sans leading-relaxed block mt-0.5">{item.desc}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* --- WEB DESIGN & DEVELOPMENT SECTION --- */}
+      <section className="relative py-28 border-t border-white/5 bg-bg-card/10">
+        <div className="max-w-7xl w-full mx-auto px-6 md:px-8 flex flex-col items-center">
+          
+          <div className="flex flex-col items-center gap-4 text-center max-w-2xl mb-16">
+            <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-lime">
+              HIGH PERFORMANCE BUILDS
+            </span>
+            <h2 className="font-space text-3xl md:text-5xl font-bold text-white leading-tight uppercase">
+              DIGITAL EXPERIENCES <br />
+              BUILT TO PERFORM.
+            </h2>
+            <p className="text-white/60 font-sans text-sm md:text-base leading-relaxed">
+              A modern, fast, mobile-first website isn't a luxury anymore — it's the baseline expectation. We design custom layouts engineered around conversion: fast load times, semantic structure, responsive code, and hardened backend points.
+            </p>
+          </div>
+
+          {/* Grid of 3 browser Mockups (Blank Placeholders) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full mt-4">
+            {[1, 2, 3].map((mockNum) => (
+              <div 
+                key={mockNum} 
+                className="relative w-full aspect-[16/10] rounded-2xl border border-white/10 bg-black/60 overflow-hidden flex flex-col justify-between p-4 shadow-xl"
+              >
+                {/* Browser top-bar */}
+                <div className="flex justify-between items-center border-b border-white/5 pb-2 mb-2">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-white/20" />
+                    <span className="w-2 h-2 rounded-full bg-white/20" />
+                    <span className="w-2 h-2 rounded-full bg-white/20" />
+                  </div>
+                  <span className="text-[8px] font-space text-white/30 lowercase tracking-wider bg-white/5 px-2 py-0.5 rounded-full">
+                    whynot27.in/dashboard_0{mockNum}
+                  </span>
+                  <div className="w-4" />
+                </div>
+
+                {/* Blank mock layout */}
+                <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-center text-white/30 grid-pattern-fine">
+                  <span className="font-space text-[10px] tracking-widest font-bold text-white/50">
+                    [DEVICE_MOCKUP_0{mockNum}_BLANK]
+                  </span>
+                  <span className="text-[8px] font-space text-white/40 max-w-[200px] leading-normal">
+                    Wireframe wrapper reserved for interface viewport displays.
+                  </span>
+                </div>
+
+                {/* Bottom specs */}
+                <div className="flex justify-between text-[8px] font-space text-white/20 pt-2 border-t border-white/5">
+                  <span>viewport_0{mockNum}</span>
+                  <span>1920 x 1080 PX</span>
+                </div>
+
+                {/* Corner details */}
+                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-accent-lime/40" />
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-accent-lime/40" />
+                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-accent-lime/40" />
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-accent-lime/40" />
+              </div>
+            ))}
+          </div>
+
+          <div className="flex gap-8 md:gap-16 justify-center flex-wrap items-center mt-12 w-full max-w-4xl border-t border-white/5 pt-10">
+            {["Fast Load", "Fully Responsive", "SEO Ready", "Security Hardened", "Scalable Base", "Conversion Focused"].map((feat, idx) => (
+              <div key={idx} className="flex items-center gap-2 text-xs font-space text-white/60">
+                <CheckCircle2 className="w-4 h-4 text-accent-lime" />
+                {feat}
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* --- DIGITAL MARKETING SECTION --- */}
+      <section className="relative py-28 border-t border-white/5 max-w-7xl mx-auto px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          
+          {/* Left Text */}
+          <div className="lg:col-span-6 flex flex-col gap-6">
+            <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-cyan">
+              REVENUE DRIVEN
+            </span>
+            <h2 className="font-space text-3xl md:text-5xl font-bold text-white leading-tight uppercase">
+              TURN ATTENTION <br />
+              INTO GROWTH.
+            </h2>
+            <p className="text-white/60 font-sans text-sm md:text-base leading-relaxed">
+              We treat marketing as a measurable system, not a monthly guessing game. Our paid campaign strategy, SEO frameworks, and conversion optimization pipelines are set up to capture demand and feed analytics straight to your board.
+            </p>
+            <div className="flex flex-col gap-3.5 border-l border-accent-cyan pl-4 py-2 mt-2">
+              <p className="text-white/80 text-sm font-space">
+                &gt; Attribution mapping so you know which channel generates pipeline value.
+              </p>
+              <p className="text-white/80 text-sm font-space">
+                &gt; Cost-per-acquisition (CPA) targets agreed upon beforehand.
+              </p>
+            </div>
+            <div>
+              <Link 
+                href="/services/digital-marketing" 
+                className="inline-flex items-center gap-2 text-sm font-space font-bold uppercase tracking-wider text-accent-cyan hover:text-white transition-colors"
+              >
+                Explore Marketing Services
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Dashboard Mock Visual */}
+          <div className="lg:col-span-6 w-full flex justify-center">
+            <div className="w-full max-w-[460px] rounded-3xl border border-white/10 bg-bg-card/50 p-6 flex flex-col gap-6 shadow-2xl relative overflow-hidden">
+              
+              <div className="flex justify-between items-center text-[10px] font-space text-white/40 pb-2 border-b border-white/5">
+                <span>MARKETING_PERFORMANCE // REPORT</span>
+                <span>MONTHLY_PERF</span>
+              </div>
+
+              {/* Data Cards grid */}
+              <div className="grid grid-cols-3 gap-4">
+                {[
+                  { label: "TRAFFIC", stat: "+184%", color: "text-accent-lime" },
+                  { label: "LEADS", stat: "+127%", color: "text-accent-cyan" },
+                  { label: "CONVERSION", stat: "+42%", color: "text-accent-violet" }
+                ].map((stat, idx) => (
+                  <div key={idx} className="bg-black/40 border border-white/5 rounded-2xl p-4 flex flex-col justify-between">
+                    <span className="font-space text-[9px] text-white/40 tracking-wider block mb-2">{stat.label}</span>
+                    <span className={`font-space text-lg md:text-xl font-bold ${stat.color} block`}>{stat.stat}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Simple Chart simulation */}
+              <div className="w-full h-32 border border-white/5 bg-black/20 rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden grid-pattern-fine">
+                <span className="font-space text-[8px] text-white/30">TRAFFIC ACQUISITION CURVE</span>
+                {/* Sparkline layout drawing mock charts */}
+                <div className="absolute inset-x-6 bottom-6 top-10 flex items-end justify-between">
+                  {[30, 45, 38, 55, 62, 58, 75, 90, 84, 105].map((val, idx) => (
+                    <div 
+                      key={idx} 
+                      style={{ height: `${val}%` }} 
+                      className={`w-2 md:w-3.5 rounded-t-sm transition-all duration-500 ${
+                        idx === 9 ? "bg-accent-lime" : idx > 6 ? "bg-accent-cyan/80" : "bg-white/10"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex justify-between items-center text-[9px] font-space text-white/30 pt-2 border-t border-white/5">
+                <span>SOURCE: ADS + GOOGLE_ORGANIC</span>
+                <span>UPDATE: REALTIME</span>
+              </div>
+
+              {/* Corner accents */}
+              <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-accent-cyan/50" />
+              <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-accent-cyan/50" />
+              <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-accent-cyan/50" />
+              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-accent-cyan/50" />
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* --- PROCESS SECTION --- */}
+      <section className="relative py-28 border-t border-white/5 bg-bg-card/10">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          
+          <div className="flex flex-col gap-4 mb-20 text-center items-center">
+            <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-violet">
+              DELIVERY WORKFLOW
+            </span>
+            <h2 className="font-space text-3xl md:text-4xl font-bold text-white uppercase">
+              HOW WE WORK
+            </h2>
+            <div className="w-12 h-1 bg-accent-violet/60 rounded" />
+          </div>
+
+          {/* Horizontal / Vertical Timeline cards */}
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+            {steps.map((st, idx) => (
+              <div 
+                key={st.num}
+                className="relative bg-bg-card/40 border border-white/5 hover:border-white/10 rounded-2xl p-6 flex flex-col transition-all duration-300"
+              >
+                {/* Number and Step label */}
+                <div className="flex justify-between items-center mb-6">
+                  <span className="font-space text-xs font-bold text-accent-violet">{st.num}</span>
+                  <span className="font-space text-[9px] uppercase tracking-wider text-white/30">STAGE</span>
+                </div>
+                
+                <h3 className="font-space text-sm font-bold text-white tracking-widest mb-3 uppercase">
+                  {st.name}
+                </h3>
+                <p className="text-white/50 text-xs leading-relaxed font-sans">
+                  {st.desc}
+                </p>
+
+                {/* Connector dots */}
+                {idx < 4 && (
+                  <div className="hidden md:block absolute top-[28px] -right-4 w-2 h-2 rounded-full bg-accent-violet/40 z-10" />
+                )}
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* --- PROJECTS SECTION --- */}
+      <section id="projects" className="relative py-28 max-w-7xl mx-auto px-6 md:px-8 border-t border-white/5">
+        
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="flex flex-col gap-4 text-left">
+            <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-lime">
+              PORTFOLIO CASES
+            </span>
+            <h2 className="font-space text-3xl md:text-4xl font-bold text-white uppercase">
+              SELECTED WORK
+            </h2>
+            <div className="w-12 h-1 bg-accent-lime/60 rounded" />
+          </div>
+          <span className="text-xs font-space tracking-widest text-white/40 uppercase">
+            VERIFIED BUILDS // 2025-2026
+          </span>
+        </div>
+
+        {/* 4 Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projects.map((proj) => (
+            <div 
+              key={proj.id}
+              className="group relative border border-white/5 hover:border-white/15 bg-bg-card/30 rounded-3xl p-6 flex flex-col gap-6 transition-all duration-300"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              {/* Blank artwork placeholder */}
+              <div className="relative w-full aspect-[16/9] rounded-2xl bg-black/60 border border-white/5 overflow-hidden flex flex-col justify-between p-4 grid-pattern-fine">
+                <div className="flex justify-between items-start text-[8px] font-space text-white/30">
+                  <span>PROJECT // ID: 0{proj.id}</span>
+                  <span>BUILD: COMPLETE</span>
+                </div>
+                
+                <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-center my-4 text-white/30">
+                  <span className="font-space text-xs font-bold tracking-widest text-white/50">
+                    [PROJECT_0{proj.id}_BLANK_MOCKUP]
+                  </span>
+                  <span className="text-[8px] font-space text-white/40 max-w-[200px]">
+                    Artwork layout space for final product snapshots.
+                  </span>
+                </div>
+
+                <div className="flex justify-between text-[8px] font-space text-white/20">
+                  <span>SCALE: GLOBAL</span>
+                  <span>VERIFIED INTEGRITY</span>
+                </div>
+
+                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-accent-lime/30" />
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-accent-lime/30" />
+                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-accent-lime/30" />
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-accent-lime/30" />
+              </div>
+
+              {/* Title & Metadata */}
+              <div className="flex justify-between items-start">
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-[10px] font-space tracking-widest text-accent-lime font-bold uppercase">
+                    {proj.category}
+                  </span>
+                  <h3 className="font-space text-lg font-bold text-white uppercase tracking-wide">
+                    {proj.title}
+                  </h3>
+                  <p className="text-white/50 text-xs font-sans max-w-sm mt-0.5 leading-relaxed">
+                    {proj.desc}
+                  </p>
+                </div>
+
+                <Link
+                  href="/contact"
+                  className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/60 group-hover:text-accent-lime group-hover:border-accent-lime transition-all duration-300 cursor-pointer"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* --- ABOUT SECTION --- */}
+      <section className="relative py-28 border-t border-white/5 bg-bg-card/10">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          
+          {/* Left Text */}
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-violet">
+              WHO WE ARE
+            </span>
+            <h2 className="font-space text-3xl md:text-5xl font-bold text-white uppercase leading-tight">
+              TECHNOLOGY WITH A <br />
+              SECURITY-FIRST MINDSET.
+            </h2>
+            <p className="text-white/60 font-sans text-sm md:text-base leading-relaxed">
+              Whynot27 was built on a simple idea: businesses shouldn't have to choose between a beautiful website and a secure one, or between fast growth and safe growth. You deserve both. 
+            </p>
+            <p className="text-white/50 font-sans text-sm leading-relaxed">
+              We question default setups, challenge assumptions, and push code performance, cloud stability, and paid conversions to their absolute boundaries. Our cross-functional structure catches security flaws, speed blockages, and campaign leaks that traditional agencies miss.
+            </p>
+            
+            <div className="flex flex-wrap items-center gap-6 mt-2">
+              <div className="flex items-center gap-2 text-xs font-space text-white/70">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-violet" />
+                Security Auditor
+              </div>
+              <div className="flex items-center gap-2 text-xs font-space text-white/70">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
+                Next.js Engineers
+              </div>
+              <div className="flex items-center gap-2 text-xs font-space text-white/70">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan" />
+                AWS Administrators
+              </div>
+            </div>
+
+            <div>
+              <Link 
+                href="/about" 
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-space text-xs font-bold uppercase tracking-wider text-white border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all duration-300"
+              >
+                Learn More About Us
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Placeholder Visual */}
+          <div className="lg:col-span-5 w-full flex justify-center">
+            <div className="relative w-full aspect-square max-w-[360px] rounded-3xl border border-white/10 bg-bg-card/40 flex flex-col justify-between p-6 grid-pattern overflow-hidden">
+              <div className="flex justify-between text-[10px] font-space text-white/30">
+                <span>IDENTITY_CONTAINER</span>
+                <span>CORP // v2.7</span>
+              </div>
+              
+              <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-center my-4 text-white/30">
+                <div className="w-12 h-12 rounded-full border border-dashed border-accent-violet flex items-center justify-center">
+                  <Layers className="w-4 h-4 text-accent-violet" />
+                </div>
+                <span className="font-space text-[10px] font-bold tracking-widest text-white/70">
+                  [IDENTITY_MOCK_VISUAL]
+                </span>
+                <span className="text-[8px] font-space text-white/40 max-w-[200px] leading-normal">
+                  Placeholder block reserved for visual team hierarchy and location coordinates map representation.
+                </span>
+              </div>
+
+              <div className="flex justify-between text-[10px] font-space text-white/30">
+                <span>DELIVERY: GLOBAL</span>
+                <span className="text-accent-violet font-bold">INTEGRITY_CHECK: PASS</span>
+              </div>
+
+              <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-accent-violet/45" />
+              <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-accent-violet/45" />
+              <div className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-accent-violet/45" />
+              <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-accent-violet/45" />
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* --- TECHNOLOGY STACK MARQUEE --- */}
+      <section className="relative py-16 border-y border-white/5 bg-black/40 overflow-hidden">
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-bg-deep to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-bg-deep to-transparent z-10 pointer-events-none" />
+        
+        <div className="flex whitespace-nowrap animate-marquee">
+          {techList.map((tech, idx) => (
+            <span 
+              key={idx}
+              className="font-space text-lg sm:text-xl font-bold uppercase tracking-wider text-white/20 hover:text-accent-lime transition-all duration-300 mx-10 cursor-pointer select-none"
             >
-              Learning
-            </a>{" "}
-            center.
+              {tech}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* --- INSIGHTS SECTION --- */}
+      <section id="insights" className="relative py-28 max-w-7xl mx-auto px-6 md:px-8">
+        
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="flex flex-col gap-4 text-left">
+            <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-violet">
+              KNOWLEDGE HUB
+            </span>
+            <h2 className="font-space text-3xl md:text-4xl font-bold text-white uppercase">
+              FROM THE LAB
+            </h2>
+            <div className="w-12 h-1 bg-accent-violet/60 rounded" />
+          </div>
+          <span className="text-xs font-space tracking-widest text-white/40 uppercase">
+            TECHNICAL DOCUMENTATION // 2026
+          </span>
+        </div>
+
+        {/* 3 cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {insights.map((ins, idx) => (
+            <div 
+              key={idx}
+              className="group border border-white/5 hover:border-white/12 bg-bg-card/30 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300"
+            >
+              <div>
+                {/* Cover visual mock */}
+                <div className="w-full aspect-[16/10] rounded-xl bg-black border border-white/5 overflow-hidden mb-6 flex flex-col justify-between p-3 grid-pattern-fine">
+                  <div className="flex justify-between items-start text-[7px] font-space text-white/30">
+                    <span>LAB_DOC_ID: 0{idx + 1}</span>
+                    <span>VER: 1.0</span>
+                  </div>
+                  
+                  <div className="text-center text-white/30 my-2 flex flex-col gap-1">
+                    <span className="font-space text-[9px] font-bold tracking-wider">
+                      [INSIGHT_0{idx + 1}_BLANK_MOCK]
+                    </span>
+                  </div>
+
+                  <span className="text-[7px] font-space text-white/20">ARTWORK COVER SPACE</span>
+                </div>
+
+                <span className="text-[10px] font-space font-bold tracking-widest text-accent-violet uppercase">
+                  {ins.tag}
+                </span>
+                
+                <h3 className="font-space text-base font-bold text-white uppercase mt-2 mb-3 leading-normal group-hover:text-accent-violet transition-colors">
+                  {ins.title}
+                </h3>
+                <p className="text-white/50 text-xs leading-relaxed font-sans">
+                  {ins.desc}
+                </p>
+              </div>
+
+              <div className="border-t border-white/5 pt-4 mt-6 flex justify-between items-center text-xs font-space">
+                <span className="text-white/40">READ_TIME // 5 MIN</span>
+                <Link href="/insights" className="text-white hover:text-accent-violet flex items-center gap-1 transition-colors">
+                  Read Article <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* --- FINAL CTA SECTION --- */}
+      <section className="relative py-28 border-t border-white/10 bg-black/60 relative overflow-hidden">
+        {/* Grid and Glow details */}
+        <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-accent-lime/5 to-transparent pointer-events-none" />
+        
+        <div className="max-w-4xl mx-auto px-6 text-center flex flex-col items-center gap-6 relative z-10">
+          <span className="font-space text-xs font-bold uppercase tracking-[0.3em] text-accent-lime">
+            SECURE YOUR DOMAIN
+          </span>
+          <h2 className="font-space text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white uppercase leading-[1.1]">
+            READY TO BUILD <br />
+            SOMETHING BETTER?
+          </h2>
+          <p className="text-white/60 font-sans text-sm md:text-base leading-relaxed max-w-xl">
+            Let's design, secure and scale your next digital system. Get a free security and website performance audit from Whynot27 today.
           </p>
+
+          <div className="mt-4">
+            <Link 
+              href="/contact" 
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-space text-sm font-bold uppercase tracking-widest text-bg-deep bg-accent-lime hover:bg-white hover:shadow-[0_0_30px_rgba(199,255,61,0.5)] transition-all duration-300"
+            >
+              START A CONVERSATION
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Coordinate details */}
+        <div className="absolute bottom-4 left-6 text-[8px] font-space text-white/20 uppercase tracking-widest">
+          SYS // COORD_LOC: 28.6139° N, 77.2090° E
         </div>
-      </main>
+        <div className="absolute bottom-4 right-6 text-[8px] font-space text-white/20 uppercase tracking-widest">
+          ESTABLISHED // 2026
+        </div>
+      </section>
+
     </div>
   );
 }
