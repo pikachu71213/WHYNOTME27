@@ -331,7 +331,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="relative py-12 border-y border-white/5 bg-bg-card/20 backdrop-blur-sm"
+        className="relative py-8 bg-bg-card/20 backdrop-blur-sm"
       >
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 text-center">
@@ -405,7 +405,7 @@ export default function Home() {
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: idx * 0.08 }}
                   whileHover={{ y: -6 }}
-                  className={`group relative rounded-2xl border border-white/5 bg-bg-card/40 p-5 sm:p-8 h-full flex flex-col justify-between transition-all duration-300 cursor-pointer overflow-hidden ${svc.accentClass}`}
+                  className={`group relative rounded-2xl border border-white/5 bg-bg-card/40 p-4 sm:p-8 h-full flex flex-col justify-between transition-all duration-300 cursor-pointer overflow-hidden ${svc.accentClass}`}
                 >
                   {/* Holographic background image with overlay */}
                   {svc.bgImage && (
@@ -420,22 +420,22 @@ export default function Home() {
 
                   <div className="relative z-10">
                     {/* Card Header metadata */}
-                    <div className="flex justify-between items-center mb-6">
-                      <span className="font-space text-xs text-white/30 tracking-widest">{svc.num} // CORE_SYS</span>
-                      <Icon className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
+                    <div className="flex justify-between items-center mb-4 sm:mb-6">
+                      <span className="font-space text-[10px] sm:text-xs text-white/30 tracking-widest">{svc.num} // CORE_SYS</span>
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white/50 group-hover:text-white transition-colors" />
                     </div>
                     
                     {/* Title & Description */}
-                    <h3 className="font-space text-lg font-bold text-white mb-3 group-hover:text-white uppercase flex items-center gap-2">
+                    <h3 className="font-space text-sm sm:text-lg font-bold text-white mb-1.5 sm:mb-3 group-hover:text-white uppercase flex items-center gap-2">
                       {svc.title}
                     </h3>
-                    <p className="text-white/60 text-sm leading-relaxed mb-6 font-sans">
+                    <p className="text-white/60 text-[11px] sm:text-sm leading-relaxed mb-2 sm:mb-6 font-sans line-clamp-2 sm:line-clamp-none">
                       {svc.desc}
                     </p>
                   </div>
 
-                  {/* Sub items */}
-                  <div className="border-t border-white/5 pt-5 mt-auto relative z-10">
+                  {/* Sub items (hidden on mobile for compact square aspect ratio) */}
+                  <div className="hidden sm:block border-t border-white/5 pt-5 mt-auto relative z-10">
                     <ul className="flex flex-col gap-2">
                       {svc.items.map((item, idx) => (
                         <li key={idx} className="flex items-center gap-2 text-xs font-space text-white/70">
@@ -456,7 +456,7 @@ export default function Home() {
       </section>
 
       {/* --- CYBERSECURITY FEATURE SECTION --- */}
-      <section className="relative py-28 border-t border-white/5 bg-bg-card/10">
+      <section className="relative py-20 bg-bg-card/10">
         <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Text */}
@@ -553,7 +553,7 @@ export default function Home() {
       </section>
 
       {/* --- DEVOPS + CLOUD SECTION --- */}
-      <section className="relative py-28 max-w-7xl mx-auto px-6 md:px-8 border-t border-white/5">
+      <section className="relative py-20 max-w-7xl mx-auto px-6 md:px-8">
         <div className="flex flex-col gap-4 mb-16 text-left">
           <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-cyan">
             AUTOMATED INTEGRATION
@@ -648,7 +648,7 @@ export default function Home() {
       </section>
 
       {/* --- WEB DESIGN & DEVELOPMENT SECTION --- */}
-      <section className="relative py-28 border-t border-white/5 bg-bg-card/10">
+      <section className="relative py-20 bg-bg-card/10">
         <div className="max-w-7xl w-full mx-auto px-6 md:px-8 flex flex-col items-center">
           
           <div className="flex flex-col items-center gap-4 text-center max-w-2xl mb-16">
@@ -722,7 +722,7 @@ export default function Home() {
       </section>
 
       {/* --- DIGITAL MARKETING SECTION --- */}
-      <section className="relative py-28 border-t border-white/5 max-w-7xl mx-auto px-6 md:px-8">
+      <section className="relative py-20 max-w-7xl mx-auto px-6 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Text */}
@@ -813,7 +813,7 @@ export default function Home() {
       </section>
 
       {/* --- PROCESS SECTION --- */}
-      <section className="relative py-28 border-t border-white/5 bg-bg-card/10">
+      <section className="relative py-20 bg-bg-card/10">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           
           <div className="flex flex-col gap-4 mb-20 text-center items-center">
@@ -858,7 +858,7 @@ export default function Home() {
       </section>
 
       {/* --- PROJECTS SECTION --- */}
-      <section id="projects" className="relative py-28 max-w-7xl mx-auto px-6 md:px-8 border-t border-white/5">
+      <section id="projects" className="relative py-20 max-w-7xl mx-auto px-6 md:px-8">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="flex flex-col gap-4 text-left">
@@ -936,7 +936,7 @@ export default function Home() {
       </section>
 
       {/* --- ABOUT SECTION --- */}
-      <section className="relative py-28 border-t border-white/5 bg-bg-card/10">
+      <section className="relative py-20 bg-bg-card/10">
         <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Text */}
@@ -1017,7 +1017,7 @@ export default function Home() {
       </section>
 
       {/* --- TECHNOLOGY STACK MARQUEE --- */}
-      <section className="relative py-16 border-y border-white/5 bg-black/40 overflow-hidden">
+      <section className="relative py-12 bg-black/40 overflow-hidden">
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-bg-deep to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-bg-deep to-transparent z-10 pointer-events-none" />
         
@@ -1099,7 +1099,7 @@ export default function Home() {
       </section>
 
       {/* --- FINAL CTA SECTION --- */}
-      <section className="relative py-28 border-t border-white/10 bg-black/60 relative overflow-hidden">
+      <section className="relative py-20 bg-black/60 relative overflow-hidden">
         {/* Grid and Glow details */}
         <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-accent-lime/5 to-transparent pointer-events-none" />

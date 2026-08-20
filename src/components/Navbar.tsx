@@ -110,6 +110,14 @@ export default function Navbar() {
             Projects
           </Link>
           <Link
+            href="/careers"
+            className={`font-sans text-sm font-medium transition-colors hover:text-accent-lime ${
+              pathname === "/careers" ? "text-accent-lime" : "text-white/70"
+            }`}
+          >
+            Careers
+          </Link>
+          <Link
             href="/insights"
             className={`font-sans text-sm font-medium transition-colors hover:text-accent-lime ${
               pathname === "/insights" ? "text-accent-lime" : "text-white/70"
@@ -207,6 +215,16 @@ export default function Navbar() {
               className="text-base font-semibold border-t border-white/5 pt-3 text-white"
             >
               Projects
+            </Link>
+
+            <Link
+              onClick={() => setIsOpen(false)}
+              href="/careers"
+              className={`text-base font-semibold border-t border-white/5 pt-3 transition-colors ${
+                pathname === "/careers" ? "text-accent-lime" : "text-white"
+              }`}
+            >
+              Careers
             </Link>
 
             <Link
