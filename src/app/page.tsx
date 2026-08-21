@@ -519,34 +519,25 @@ export default function Home() {
 
           {/* Right cybersecurity visual placeholder */}
           <div className="lg:col-span-6 w-full flex justify-center">
-            <div className="relative w-full aspect-[4/3] rounded-3xl border border-white/10 bg-bg-card/40 flex flex-col justify-between p-6 grid-pattern overflow-hidden">
-              <div className="flex justify-between text-[10px] font-space text-white/30">
-                <span>VAPT_MODULE_ACTIVE</span>
-                <span>STATUS: TESTING</span>
-              </div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative w-full aspect-[4/3] overflow-hidden"
+            >
+              {/* The Image */}
+              <img 
+                src="/cyber_foundation_bg.jpg" 
+                alt="Cyber Security Foundation" 
+                className="w-full h-full object-cover opacity-80"
+              />
               
-              <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-center my-6">
-                <div className="w-16 h-16 rounded-full border border-dashed border-accent-violet flex items-center justify-center animate-spin duration-5000">
-                  <Lock className="w-6 h-6 text-accent-violet" />
-                </div>
-                <span className="font-space text-xs font-bold tracking-widest text-white/70">
-                  [BLANK_SEC_ARTWORK_PLACEHOLDER]
-                </span>
-                <span className="text-[9px] font-space text-white/40 max-w-[280px]">
-                  Visual block reserved for upcoming network vulnerability vector diagrams.
-                </span>
-              </div>
-
-              <div className="flex justify-between text-[10px] font-space text-white/30">
-                <span>COORDS // [x:98.2, y:12.7]</span>
-                <span className="text-accent-violet font-bold">SECURE_AGENT_READY</span>
-              </div>
-
-              <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-accent-violet/50" />
-              <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-accent-violet/50" />
-              <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-accent-violet/50" />
-              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-accent-violet/50" />
-            </div>
+              {/* Edge gradients to blend into background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-bg-deep via-transparent to-bg-deep pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-bg-deep via-transparent to-bg-deep pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,#050505_98%)] pointer-events-none" />
+            </motion.div>
           </div>
 
         </div>
