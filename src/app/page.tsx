@@ -127,8 +127,29 @@ const projects = [
 ];
 
 const techList = [
-  "AWS", "Azure", "Docker", "Linux", "Python", "React", "Node.js", "MongoDB", "Git", "GitHub", "Cloudflare", "Nginx", "Kubernetes",
-  "AWS", "Azure", "Docker", "Linux", "Python", "React", "Node.js", "MongoDB", "Git", "GitHub", "Cloudflare", "Nginx", "Kubernetes"
+  { name: "AWS", slug: "amazonaws" },
+  { name: "Azure", slug: "azure" },
+  { name: "GCP", slug: "googlecloud" },
+  { name: "Docker", slug: "docker" },
+  { name: "Kubernetes", slug: "kubernetes" },
+  { name: "Terraform", slug: "terraform" },
+  { name: "Linux", slug: "linux" },
+  { name: "Python", slug: "python" },
+  { name: "TypeScript", slug: "typescript" },
+  { name: "JavaScript", slug: "javascript" },
+  { name: "React", slug: "react" },
+  { name: "Next.js", slug: "nextdotjs" },
+  { name: "Node.js", slug: "nodedotjs" },
+  { name: "HTML5", slug: "html5" },
+  { name: "CSS3", slug: "css3" },
+  { name: "MongoDB", slug: "mongodb" },
+  { name: "Git", slug: "git" },
+  { name: "GitHub", slug: "github" },
+  { name: "Cloudflare", slug: "cloudflare" },
+  { name: "Nginx", slug: "nginx" },
+  { name: "Google Analytics", slug: "googleanalytics" },
+  { name: "Semrush", slug: "semrush" },
+  { name: "Ahrefs", slug: "ahrefs" }
 ];
 
 const homepageBlogs = [
@@ -234,6 +255,52 @@ const bannerSlides = [
     btnClass: "bg-accent-cyan text-bg-deep hover:shadow-[0_0_25px_rgba(34,211,238,0.4)]"
   }
 ];
+
+function TechIcon({ slug, name }: { slug: string; name: string }) {
+  const [error, setError] = useState(false);
+
+  // Render Ahrefs SVG inline to bypass adblocker URL block rules
+  if (slug === "ahrefs") {
+    return (
+      <svg 
+        viewBox="0 0 128 128" 
+        className="w-7 h-7 object-contain opacity-35 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 text-white group-hover:text-[#ff8800]"
+        fill="currentColor"
+      >
+        <path d="m24 8v24h64v16l-26.104 0.456c-35.096 3.256-45.896 11.624-45.896 36.504v6.512c0 19.064 14.328 28.528 32 28.528 7.984 0 16.32-1.56 25.04-5.976l14.96-6.024v12h24v-112zm64 76-18.112 7.472c-6.296 3.488-12.832 5.344-17.92 5.344-6.288 0-11.968-1.136-11.968-8.816v-5.12c0.48-8.136 7.376-11.176 26.256-13.032l21.744-1.848z" />
+      </svg>
+    );
+  }
+
+  let src = `https://cdn.simpleicons.org/${slug}`;
+  if (slug === "azure") {
+    src = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/azure/azure-original.svg";
+  } else if (slug === "amazonaws") {
+    src = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/amazonwebservices/amazonwebservices-original-wordmark.svg";
+  } else if (slug === "css3") {
+    src = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/css3/css3-original.svg";
+  } else if (slug === "nextdotjs" || slug === "github") {
+    src = `https://cdn.simpleicons.org/${slug}/fff`;
+  }
+
+  if (error) {
+    return (
+      <div className="w-7 h-7 rounded-full bg-accent-lime/10 border border-accent-lime/20 flex items-center justify-center text-accent-lime text-[10px] font-bold font-space uppercase">
+        {name.substring(0, 2)}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={name}
+      className="w-7 h-7 object-contain opacity-35 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+      onError={() => setError(true)}
+      loading="lazy"
+    />
+  );
+}
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -1012,20 +1079,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- TECHNOLOGY STACK MARQUEE --- */}
-      <section className="relative py-12 bg-black/40 overflow-hidden">
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-bg-deep to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-bg-deep to-transparent z-10 pointer-events-none" />
-        
-        <div className="flex whitespace-nowrap animate-marquee">
-          {techList.map((tech, idx) => (
-            <span 
-              key={idx}
-              className="font-space text-lg sm:text-xl font-bold uppercase tracking-wider text-white/20 hover:text-accent-lime transition-all duration-300 mx-10 cursor-pointer select-none"
-            >
-              {tech}
+      {/* --- TECHNOLOGIES WE WORK WITH --- */}
+      <section className="relative py-20 bg-black/20">
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          
+          <div className="flex flex-col gap-3 text-center mb-14">
+            <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-lime">
+              TECHNOLOGY ECOSYSTEM
             </span>
-          ))}
+            <h2 className="font-space text-3xl md:text-4xl font-bold text-white uppercase">
+              Technologies We Work With
+            </h2>
+            <p className="text-white/50 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
+              We leverage enterprise-grade, secure, and modern technologies to build, test, and scale your digital frameworks.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
+            {techList.map((tech, idx) => (
+              <div 
+                key={idx}
+                className="bg-white/[0.01] hover:bg-white/[0.03] p-5 rounded-2xl flex flex-col items-center justify-center gap-3.5 transition-all duration-300 group shadow-md"
+              >
+                <div className="w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <TechIcon slug={tech.slug} name={tech.name} />
+                </div>
+                <span className="font-space text-[10px] font-bold text-white/50 group-hover:text-white transition-colors uppercase tracking-wider">
+                  {tech.name}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

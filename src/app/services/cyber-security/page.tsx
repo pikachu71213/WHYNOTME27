@@ -256,14 +256,14 @@ export default function CyberSecurityPage() {
   );
 
   return (
-    <div className="relative min-h-screen bg-bg-deep pt-28 pb-20 overflow-hidden font-sans">
+    <div className="relative min-h-screen bg-bg-deep pt-28 pb-20 overflow-x-clip font-sans">
       
-      {/* 1. Main Hero Banner with Generated Background Image */}
+      {/* 1. Main Hero Banner with Generic Clean Background Image */}
       <section className="relative w-full min-h-[90vh] flex items-center justify-center py-20 px-6 overflow-hidden">
         {/* Background Image with Dark overlay fade */}
         <div 
           className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105"
-          style={{ backgroundImage: `url('/services/cyber_hero.jpg')` }}
+          style={{ backgroundImage: `url('/services/cybersecurity_bg.jpg')` }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/95 via-bg-deep/85 to-[#020617]" />
         
@@ -296,7 +296,7 @@ export default function CyberSecurityPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="font-space text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase mb-4"
           >
-            WHYNOTME27
+            CYBER SECURITY
           </motion.h1>
           
           <motion.p
@@ -305,7 +305,7 @@ export default function CyberSecurityPage() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="font-space text-lg sm:text-2xl font-bold tracking-[0.25em] text-accent-cyan uppercase mb-6"
           >
-            CYBER SECURITY SERVICES
+            ADVANCED THREAT PROTECTION & PENTESTING
           </motion.p>
 
           <motion.div

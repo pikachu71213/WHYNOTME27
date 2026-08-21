@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Preloader from "@/components/Preloader";
 
 export const metadata: Metadata = {
   title: "WHYNOT27 | Cyber Security, Web Dev & Cloud Solutions",
@@ -31,6 +32,7 @@ export default function RootLayout({
       className="h-full antialiased dark"
     >
       <body className="min-h-full flex flex-col bg-bg-deep text-white selection:bg-accent-lime selection:text-bg-deep font-sans">
+        <Preloader />
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
