@@ -194,12 +194,7 @@ export default function Navbar() {
             About
           </Link>
           
-          <Link
-            href="/#projects"
-            className="font-sans text-sm font-medium text-white/70 hover:text-accent-lime transition-colors"
-          >
-            Projects
-          </Link>
+
           <Link
             href="/careers"
             className={`font-sans text-sm font-medium transition-colors hover:text-accent-lime ${
@@ -209,12 +204,12 @@ export default function Navbar() {
             Careers
           </Link>
           <Link
-            href="/insights"
+            href="/blogs"
             className={`font-sans text-sm font-medium transition-colors hover:text-accent-lime ${
-              pathname === "/insights" ? "text-accent-lime" : "text-white/70"
+              pathname === "/blogs" ? "text-accent-lime" : "text-white/70"
             }`}
           >
-            Insights
+            Blogs
           </Link>
         </div>
 
@@ -302,14 +297,6 @@ export default function Navbar() {
 
             <Link
               onClick={() => setIsOpen(false)}
-              href="/#projects"
-              className="text-base font-semibold border-t border-white/5 pt-3 text-white"
-            >
-              Projects
-            </Link>
-
-            <Link
-              onClick={() => setIsOpen(false)}
               href="/careers"
               className={`text-base font-semibold border-t border-white/5 pt-3 transition-colors ${
                 pathname === "/careers" ? "text-accent-lime" : "text-white"
@@ -320,12 +307,12 @@ export default function Navbar() {
 
             <Link
               onClick={() => setIsOpen(false)}
-              href="/insights"
+              href="/blogs"
               className={`text-base font-semibold border-t border-white/5 pt-3 transition-colors ${
-                pathname === "/insights" ? "text-accent-lime" : "text-white"
+                pathname === "/blogs" ? "text-accent-lime" : "text-white"
               }`}
             >
-              Insights
+              Blogs
             </Link>
           </div>
 

@@ -133,20 +133,13 @@ export default function Footer() {
                   About Us
                 </Link>
               </li>
+
               <li>
                 <Link
-                  href="/#projects"
+                  href="/blogs"
                   className="text-white/60 hover:text-accent-lime text-sm transition-colors"
                 >
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/insights"
-                  className="text-white/60 hover:text-accent-lime text-sm transition-colors"
-                >
-                  Insights
+                  Blogs
                 </Link>
               </li>
               <li>

@@ -131,21 +131,62 @@ const techList = [
   "AWS", "Azure", "Docker", "Linux", "Python", "React", "Node.js", "MongoDB", "Git", "GitHub", "Cloudflare", "Nginx", "Kubernetes"
 ];
 
-const insights = [
+const homepageBlogs = [
   {
-    tag: "SECURITY",
-    title: "How Modern Businesses Should Approach Cybersecurity",
-    desc: "Why perimeter security is dead and zero-trust framework models are the baseline requirement in 2026."
+    slug: "zero-trust-network-postures",
+    category: "Cybersecurity",
+    title: "Zero-Trust Architecture: Securing Modern Distributed Teams",
+    desc: "Traditional firewalls are dead. Learn why micro-segmentation, identity federation, and device posturing are critical for protecting modern enterprise workloads.",
+    cover: "/blog_cyber.jpg",
+    tagColor: "text-purple-400 border-purple-500/30 bg-purple-500/5",
+    hoverColor: "group-hover:text-purple-400",
+    readTime: "6 min read",
+    metaTitle: "Zero-Trust Architecture Guide 2026 | WHYNOT27 Blogs",
+    metaDesc: "Master Zero-Trust Network Access (ZTNA) implementation security checklists. Learn micro-segmentation, identity federation, and device validation policies.",
+    seoKeywords: ["zero trust architecture", "ZTNA implementation", "network segmentation security", "enterprise cyber protection"],
+    datePublished: "2026-08-20"
   },
   {
-    tag: "DEVOPS",
-    title: "Why DevOps Automation Matters for Scaling",
-    desc: "How manual deployments drain engineering speed and why unified pipelines keep systems reliable."
+    slug: "aws-deployment-hardening-2026",
+    category: "DevOps",
+    title: "AWS Secure Hardening: The Ultimate Infrastructure Checklist",
+    desc: "Misconfigured cloud servers account for 82% of breaches. Follow this hands-on guide for hardening EC2 security groups, VPC routing tables, and S3 credentials.",
+    cover: "/blog_devops.jpg",
+    tagColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/5",
+    hoverColor: "group-hover:text-cyan-400",
+    readTime: "8 min read",
+    metaTitle: "AWS Infrastructure Hardening Checklist 2026 | WHYNOT27 Blogs",
+    metaDesc: "Actionable DevSecOps security checklist for AWS resources. Secure your security groups, configuration tables, VPC routers, and S3 credentials.",
+    seoKeywords: ["AWS cloud security checklist", "server hardening configurations", "secure DevOps pipelines", "VPC peering security"],
+    datePublished: "2026-08-15"
   },
   {
-    tag: "CLOUD",
-    title: "Building Secure Cloud Infrastructure",
-    desc: "A developer's checklist for configuring IAM roles, blocking open ports, and securing serverless databases."
+    slug: "nextjs-optimizations-web-vitals",
+    category: "Web Development",
+    title: "Mastering Next.js Speed: Shave Seconds off Your LCP",
+    desc: "A deep dive into server component payloads, font preloading, layout shifts mitigation, and Edge Middleware caching configurations to score 100 on PageSpeed.",
+    cover: "/blog_webdev.jpg",
+    tagColor: "text-lime-400 border-lime-500/30 bg-lime-500/5",
+    hoverColor: "group-hover:text-accent-lime",
+    readTime: "5 min read",
+    metaTitle: "Next.js Core Web Vitals Optimization Guide | WHYNOT27 Blogs",
+    metaDesc: "Step-by-step developer tutorial for improving Largest Contentful Paint (LCP) speeds below 1.2s in Next.js web application structures.",
+    seoKeywords: ["Next.js performance optimization", "Core Web Vitals conversions", "speed seo optimization", "React Server Components"],
+    datePublished: "2026-08-18"
+  },
+  {
+    slug: "performance-marketing-metrics-growth",
+    category: "Data Analytics",
+    title: "Data-Driven Attribution: Scaling Campaigns with Zero Waste",
+    desc: "Say goodbye to campaign guessing games. Discover how multi-touch attribution models and server-side tracking APIs fuel your growth metrics.",
+    cover: "/blog_data.jpg",
+    tagColor: "text-amber-400 border-amber-500/30 bg-amber-500/5",
+    hoverColor: "group-hover:text-amber-400",
+    readTime: "7 min read",
+    metaTitle: "Data-Driven Marketing Attribution Models 2026 | WHYNOT27 Blogs",
+    metaDesc: "Discover how to capture client conversion pipelines using server-side analytics, API tracking triggers, and multi-touch attribution frameworks.",
+    seoKeywords: ["marketing attribution models", "data driven campaign tracking", "server side analytics triggers", "growth analytics metrics"],
+    datePublished: "2026-08-12"
   }
 ];
 
@@ -235,8 +276,44 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "WHYNOT27 Publications",
+    "description": "Latest engineering, DevOps, frontend dev, and cybersecurity blogs.",
+    "url": "https://whynot27.in/",
+    "blogPost": homepageBlogs.map(blog => ({
+      "@type": "BlogPosting",
+      "headline": blog.title,
+      "description": blog.desc,
+      "datePublished": blog.datePublished,
+      "image": `https://whynot27.in${blog.cover}`,
+      "author": {
+        "@type": "Organization",
+        "name": "WHYNOT27 Security Labs"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "WHYNOT27",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://whynot27.in/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://whynot27.in/blogs`
+      }
+    }))
+  };
+
   return (
     <div className="relative w-full bg-bg-deep overflow-hidden">
+      {/* Inject JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
       
       {/* Decorative Grid Backgrounds */}
       <div className="absolute inset-0 grid-pattern opacity-40 pointer-events-none -z-20" />
@@ -579,36 +656,27 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          {/* Left Visual Placeholder */}
+          {/* Left Visual Illustration */}
           <div className="lg:col-span-6 w-full flex justify-center order-2 lg:order-1">
-            <div className="relative w-full aspect-[4/3] rounded-3xl border border-white/10 bg-bg-card/40 flex flex-col justify-between p-6 grid-pattern overflow-hidden">
-              <div className="flex justify-between text-[10px] font-space text-white/30">
-                <span>INFRASTRUCTURE // SCHEMA</span>
-                <span>VER: 4.8.1</span>
-              </div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative w-full aspect-[4/3] overflow-hidden"
+            >
+              {/* The Image */}
+              <img 
+                src="/cloud_infra_bg.jpg" 
+                alt="Reliable Cloud Infrastructure" 
+                className="w-full h-full object-cover opacity-80"
+              />
               
-              <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-center my-6">
-                <div className="w-16 h-16 rounded-full border border-dashed border-accent-cyan flex items-center justify-center animate-pulse">
-                  <Database className="w-6 h-6 text-accent-cyan" />
-                </div>
-                <span className="font-space text-xs font-bold tracking-widest text-white/70">
-                  [BLANK_CLOUD_INFRASTRUCTURE_PLACEHOLDER]
-                </span>
-                <span className="text-[9px] font-space text-white/40 max-w-[280px]">
-                  Space allocated for upcoming cloud architecture diagrams, load balancer schematics, and Docker mapping files.
-                </span>
-              </div>
-
-              <div className="flex justify-between text-[10px] font-space text-white/30">
-                <span>DEPLOY: AUTO</span>
-                <span className="text-accent-cyan font-bold">AWS_ACTIVE</span>
-              </div>
-
-              <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-accent-cyan/50" />
-              <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-accent-cyan/50" />
-              <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-accent-cyan/50" />
-              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-accent-cyan/50" />
-            </div>
+              {/* Edge gradients to blend into background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-bg-deep via-transparent to-bg-deep pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-bg-deep via-transparent to-bg-deep pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,#050505_98%)] pointer-events-none" />
+            </motion.div>
           </div>
 
           {/* Right Text */}
@@ -639,76 +707,104 @@ export default function Home() {
       </section>
 
       {/* --- WEB DESIGN & DEVELOPMENT SECTION --- */}
-      <section className="relative py-20 bg-bg-card/10">
+      {/* --- OUR TRUSTED CLIENTS SECTION --- */}
+      <section className="relative py-20 bg-bg-card/10 overflow-hidden">
         <div className="max-w-7xl w-full mx-auto px-6 md:px-8 flex flex-col items-center">
           
-          <div className="flex flex-col items-center gap-4 text-center max-w-2xl mb-16">
+          <div className="flex flex-col items-center gap-4 text-center max-w-2xl mb-12">
             <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-lime">
-              HIGH PERFORMANCE BUILDS
+              OUR TRUSTED PARTNERS
             </span>
             <h2 className="font-space text-3xl md:text-5xl font-bold text-white leading-tight uppercase">
-              DIGITAL EXPERIENCES <br />
-              BUILT TO PERFORM.
+              OUR TRUSTED CLIENTS
             </h2>
             <p className="text-white/60 font-sans text-sm md:text-base leading-relaxed">
-              A modern, fast, mobile-first website isn't a luxury anymore — it's the baseline expectation. We design custom layouts engineered around conversion: fast load times, semantic structure, responsive code, and hardened backend points.
+              We collaborate with high-performance sports organizations, leading pharmaceutical networks, and social welfare foundations to build resilient, secure, and modern digital ecosystems.
             </p>
           </div>
+        </div>
 
-          {/* Grid of 3 browser Mockups (Blank Placeholders) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full mt-4">
-            {[1, 2, 3].map((mockNum) => (
-              <div 
-                key={mockNum} 
-                className="relative w-full aspect-[16/10] rounded-2xl border border-white/10 bg-black/60 overflow-hidden flex flex-col justify-between p-4 shadow-xl"
+        {/* Dynamic Infinite Auto-Scroll Client Cards */}
+        <div className="relative w-full py-4 flex overflow-hidden">
+          {/* Fade gradients at edges */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-bg-deep to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-bg-deep to-transparent z-10 pointer-events-none" />
+
+          {/* Marquee Inner container (duplicated for seamless looping) */}
+          <div className="flex whitespace-nowrap animate-marquee py-2">
+            {[...Array(3)].flatMap((_, loopIdx) => [
+              {
+                name: "UDIISA Sports",
+                sector: "Sports NGO India",
+                logo: "/client_udi.webp",
+                url: "https://udisports.in"
+              },
+              {
+                name: "Himu Pharmaceutical",
+                sector: "Healthcare & Cosmetics",
+                logo: "/client_himu.png",
+                url: "https://himupharmaceutical.com/"
+              },
+              {
+                name: "KUJ Foundation",
+                sector: "Social Welfare NGO",
+                logo: "/client_kuj.png",
+                url: "https://kalyaanujwalafoundation.com/"
+              },
+              {
+                name: "HIAT Institute",
+                sector: "Accounts & Taxation",
+                logo: "/client_hiat.png",
+                url: "https://hiatinstitute.com/"
+              },
+              {
+                name: "Woxy Academy",
+                sector: "Science & Physics Coaching",
+                logo: "/client_woxy.png",
+                url: "https://www.woxyacademy.com/"
+              },
+              {
+                name: "BITS School",
+                sector: "CBSE Education Network",
+                logo: "/client_bits.jpeg",
+                url: "https://bisbhiwani.in/"
+              },
+              {
+                name: "Vitalflex Physio",
+                sector: "Clinical Physiotherapy",
+                logo: "/client_vitalflex.svg",
+                url: "https://vitalflexphysio.com/"
+              }
+            ]).map((client, idx) => (
+              <a
+                key={idx}
+                href={client.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center w-[300px] h-20 bg-bg-card/30 border border-white/5 rounded-2xl overflow-hidden shadow-lg select-none mx-4 shrink-0 hover:border-white/15 hover:bg-bg-card/50 transition-all duration-300 group"
               >
-                {/* Browser top-bar */}
-                <div className="flex justify-between items-center border-b border-white/5 pb-2 mb-2">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-white/20" />
-                    <span className="w-2 h-2 rounded-full bg-white/20" />
-                    <span className="w-2 h-2 rounded-full bg-white/20" />
-                  </div>
-                  <span className="text-[8px] font-space text-white/30 lowercase tracking-wider bg-white/5 px-2 py-0.5 rounded-full">
-                    whynot27.in/dashboard_0{mockNum}
-                  </span>
-                  <div className="w-4" />
+                {/* Left side: white background with logo */}
+                <div className="w-24 h-full bg-white flex items-center justify-center p-3.5 shrink-0 relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={client.logo}
+                    alt={`${client.name} Logo`}
+                    className="max-w-full max-h-full object-contain filter contrast-125"
+                  />
                 </div>
-
-                {/* Blank mock layout */}
-                <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-center text-white/30 grid-pattern-fine">
-                  <span className="font-space text-[10px] tracking-widest font-bold text-white/50">
-                    [DEVICE_MOCKUP_0{mockNum}_BLANK]
+                
+                {/* Right side: company name and info */}
+                <div className="flex-grow px-5 flex flex-col justify-center text-left overflow-hidden">
+                  <span className="font-space text-xs font-bold text-white uppercase tracking-wider line-clamp-1 group-hover:text-accent-lime transition-colors">
+                    {client.name}
                   </span>
-                  <span className="text-[8px] font-space text-white/40 max-w-[200px] leading-normal">
-                    Wireframe wrapper reserved for interface viewport displays.
+                  <span className="text-[9px] font-sans text-white/40 mt-0.5 uppercase tracking-widest truncate">
+                    {client.sector}
                   </span>
                 </div>
-
-                {/* Bottom specs */}
-                <div className="flex justify-between text-[8px] font-space text-white/20 pt-2 border-t border-white/5">
-                  <span>viewport_0{mockNum}</span>
-                  <span>1920 x 1080 PX</span>
-                </div>
-
-                {/* Corner details */}
-                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-accent-lime/40" />
-                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-accent-lime/40" />
-                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-accent-lime/40" />
-                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-accent-lime/40" />
-              </div>
+              </a>
             ))}
           </div>
-
-          <div className="flex gap-8 md:gap-16 justify-center flex-wrap items-center mt-12 w-full max-w-4xl border-t border-white/5 pt-10">
-            {["Fast Load", "Fully Responsive", "SEO Ready", "Security Hardened", "Scalable Base", "Conversion Focused"].map((feat, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-xs font-space text-white/60">
-                <CheckCircle2 className="w-4 h-4 text-accent-lime" />
-                {feat}
-              </div>
-            ))}
-          </div>
-
         </div>
       </section>
 
@@ -848,83 +944,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- PROJECTS SECTION --- */}
-      <section id="projects" className="relative py-20 max-w-7xl mx-auto px-6 md:px-8">
-        
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div className="flex flex-col gap-4 text-left">
-            <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-lime">
-              PORTFOLIO CASES
-            </span>
-            <h2 className="font-space text-3xl md:text-4xl font-bold text-white uppercase">
-              SELECTED WORK
-            </h2>
-            <div className="w-12 h-1 bg-accent-lime/60 rounded" />
-          </div>
-          <span className="text-xs font-space tracking-widest text-white/40 uppercase">
-            VERIFIED BUILDS // 2025-2026
-          </span>
-        </div>
 
-        {/* 4 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((proj) => (
-            <div 
-              key={proj.id}
-              className="group relative border border-white/5 hover:border-white/15 bg-bg-card/30 rounded-3xl p-6 flex flex-col gap-6 transition-all duration-300"
-            >
-              {/* Blank artwork placeholder */}
-              <div className="relative w-full aspect-[16/9] rounded-2xl bg-black/60 border border-white/5 overflow-hidden flex flex-col justify-between p-4 grid-pattern-fine">
-                <div className="flex justify-between items-start text-[8px] font-space text-white/30">
-                  <span>PROJECT // ID: 0{proj.id}</span>
-                  <span>BUILD: COMPLETE</span>
-                </div>
-                
-                <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-center my-4 text-white/30">
-                  <span className="font-space text-xs font-bold tracking-widest text-white/50">
-                    [PROJECT_0{proj.id}_BLANK_MOCKUP]
-                  </span>
-                  <span className="text-[8px] font-space text-white/40 max-w-[200px]">
-                    Artwork layout space for final product snapshots.
-                  </span>
-                </div>
-
-                <div className="flex justify-between text-[8px] font-space text-white/20">
-                  <span>SCALE: GLOBAL</span>
-                  <span>VERIFIED INTEGRITY</span>
-                </div>
-
-                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-accent-lime/30" />
-                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-accent-lime/30" />
-                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-accent-lime/30" />
-                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-accent-lime/30" />
-              </div>
-
-              {/* Title & Metadata */}
-              <div className="flex justify-between items-start">
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] font-space tracking-widest text-accent-lime font-bold uppercase">
-                    {proj.category}
-                  </span>
-                  <h3 className="font-space text-lg font-bold text-white uppercase tracking-wide">
-                    {proj.title}
-                  </h3>
-                  <p className="text-white/50 text-xs font-sans max-w-sm mt-0.5 leading-relaxed">
-                    {proj.desc}
-                  </p>
-                </div>
-
-                <Link
-                  href="/contact"
-                  className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/60 group-hover:text-accent-lime group-hover:border-accent-lime transition-all duration-300 cursor-pointer"
-                >
-                  <ArrowUpRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* --- ABOUT SECTION --- */}
       <section className="relative py-20 bg-bg-card/10">
@@ -972,35 +992,20 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right Placeholder Visual */}
+          {/* Right Borderless Background-Merged Visual */}
           <div className="lg:col-span-5 w-full flex justify-center">
-            <div className="relative w-full aspect-square max-w-[360px] rounded-3xl border border-white/10 bg-bg-card/40 flex flex-col justify-between p-6 grid-pattern overflow-hidden">
-              <div className="flex justify-between text-[10px] font-space text-white/30">
-                <span>IDENTITY_CONTAINER</span>
-                <span>CORP // v2.7</span>
-              </div>
+            <div className="relative w-full aspect-square max-w-[380px] overflow-hidden rounded-full">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/security_first_bg.jpg"
+                alt="Security First Mindset Graphic"
+                className="w-full h-full object-cover opacity-85"
+              />
               
-              <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-center my-4 text-white/30">
-                <div className="w-12 h-12 rounded-full border border-dashed border-accent-violet flex items-center justify-center">
-                  <Layers className="w-4 h-4 text-accent-violet" />
-                </div>
-                <span className="font-space text-[10px] font-bold tracking-widest text-white/70">
-                  [IDENTITY_MOCK_VISUAL]
-                </span>
-                <span className="text-[8px] font-space text-white/40 max-w-[200px] leading-normal">
-                  Placeholder block reserved for visual team hierarchy and location coordinates map representation.
-                </span>
-              </div>
-
-              <div className="flex justify-between text-[10px] font-space text-white/30">
-                <span>DELIVERY: GLOBAL</span>
-                <span className="text-accent-violet font-bold">INTEGRITY_CHECK: PASS</span>
-              </div>
-
-              <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-accent-violet/45" />
-              <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-accent-violet/45" />
-              <div className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-accent-violet/45" />
-              <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-accent-violet/45" />
+              {/* Black gradient edge-blenders */}
+              <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-transparent to-bg-deep opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-r from-bg-deep via-transparent to-bg-deep opacity-60" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,#050505_95%)] pointer-events-none" />
             </div>
           </div>
 
@@ -1024,63 +1029,62 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- INSIGHTS SECTION --- */}
-      <section id="insights" className="relative py-28 max-w-7xl mx-auto px-6 md:px-8">
+      {/* --- LATEST BLOGS SECTION --- */}
+      <section id="blogs" className="relative py-20 max-w-7xl mx-auto px-6 md:px-8">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="flex flex-col gap-4 text-left">
-            <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-violet">
-              KNOWLEDGE HUB
+            <span className="font-space text-xs font-bold uppercase tracking-[0.25em] text-accent-lime">
+              LATEST PUBLICATIONS
             </span>
             <h2 className="font-space text-3xl md:text-4xl font-bold text-white uppercase">
-              FROM THE LAB
+              FROM THE BLOG
             </h2>
-            <div className="w-12 h-1 bg-accent-violet/60 rounded" />
+            <div className="w-12 h-1 bg-accent-lime/60 rounded" />
           </div>
           <span className="text-xs font-space tracking-widest text-white/40 uppercase">
-            TECHNICAL DOCUMENTATION // 2026
+            TECHNICAL ARTICLES // 2026
           </span>
         </div>
 
-        {/* 3 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {insights.map((ins, idx) => (
+        {/* 4 Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {homepageBlogs.map((blog, idx) => (
             <div 
               key={idx}
               className="group border border-white/5 hover:border-white/12 bg-bg-card/30 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300"
             >
               <div>
-                {/* Cover visual mock */}
-                <div className="w-full aspect-[16/10] rounded-xl bg-black border border-white/5 overflow-hidden mb-6 flex flex-col justify-between p-3 grid-pattern-fine">
-                  <div className="flex justify-between items-start text-[7px] font-space text-white/30">
-                    <span>LAB_DOC_ID: 0{idx + 1}</span>
-                    <span>VER: 1.0</span>
-                  </div>
+                {/* Cover image with zoom hover */}
+                <div className="w-full aspect-[16/10] rounded-xl bg-black border border-white/5 overflow-hidden mb-6 relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img 
+                    src={blog.cover} 
+                    alt={blog.title} 
+                    className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80" />
                   
-                  <div className="text-center text-white/30 my-2 flex flex-col gap-1">
-                    <span className="font-space text-[9px] font-bold tracking-wider">
-                      [INSIGHT_0{idx + 1}_BLANK_MOCK]
-                    </span>
+                  <div className="absolute bottom-3 left-3 text-[8px] font-space text-white/40 uppercase tracking-widest">
+                    ID: 0{idx + 1} // BLOG_SYS
                   </div>
-
-                  <span className="text-[7px] font-space text-white/20">ARTWORK COVER SPACE</span>
                 </div>
 
-                <span className="text-[10px] font-space font-bold tracking-widest text-accent-violet uppercase">
-                  {ins.tag}
+                <span className={`text-[10px] font-space font-bold tracking-widest uppercase px-2.5 py-0.5 rounded border ${blog.tagColor}`}>
+                  {blog.category}
                 </span>
                 
-                <h3 className="font-space text-base font-bold text-white uppercase mt-2 mb-3 leading-normal group-hover:text-accent-violet transition-colors">
-                  {ins.title}
+                <h3 className={`font-space text-base font-bold text-white uppercase mt-4 mb-3 leading-snug ${blog.hoverColor} transition-colors duration-300`}>
+                  {blog.title}
                 </h3>
-                <p className="text-white/50 text-xs leading-relaxed font-sans">
-                  {ins.desc}
+                <p className="text-white/50 text-xs leading-relaxed font-sans line-clamp-3">
+                  {blog.desc}
                 </p>
               </div>
 
               <div className="border-t border-white/5 pt-4 mt-6 flex justify-between items-center text-xs font-space">
-                <span className="text-white/40">READ_TIME // 5 MIN</span>
-                <Link href="/insights" className="text-white hover:text-accent-violet flex items-center gap-1 transition-colors">
+                <span className="text-white/40">{blog.readTime}</span>
+                <Link href="/blogs" className={`text-white ${blog.hoverColor} flex items-center gap-1 transition-colors`}>
                   Read Article <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
