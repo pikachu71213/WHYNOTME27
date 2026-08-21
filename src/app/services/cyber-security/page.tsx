@@ -25,11 +25,7 @@ import {
   Cpu,
   CheckCircle2,
   AlertCircle,
-  RefreshCw,
   FileText,
-  MousePointerClick,
-  MapPin,
-  TrendingUp,
   Briefcase,
   Cloud
 } from "lucide-react";
@@ -262,31 +258,34 @@ export default function CyberSecurityPage() {
   return (
     <div className="relative min-h-screen bg-bg-deep pt-28 pb-20 overflow-hidden font-sans">
       
-      {/* 1. Matrix Hero Banner */}
-      <section className="relative w-full min-h-[90vh] flex items-center justify-center border-b border-white/5 py-20 px-6 overflow-hidden">
-        {/* Matrix rain canvas background overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-bg-deep to-[#020617] -z-20" />
-        <MatrixRain color="#22d3ee" opacity={0.12} speed={1.2} />
+      {/* 1. Main Hero Banner with Generated Background Image */}
+      <section className="relative w-full min-h-[90vh] flex items-center justify-center py-20 px-6 overflow-hidden">
+        {/* Background Image with Dark overlay fade */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105"
+          style={{ backgroundImage: `url('/services/cyber_hero.jpg')` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/95 via-bg-deep/85 to-[#020617]" />
         
-        {/* HUD Grid Overlay */}
-        <div className="absolute inset-0 grid-pattern-fine opacity-20 pointer-events-none -z-10" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-accent-cyan/5 blur-[160px] rounded-full pointer-events-none -z-10" />
-        <div className="absolute bottom-10 right-10 w-64 h-64 bg-accent-violet/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+        {/* Matrix rain canvas background overlay */}
+        <MatrixRain color="#22d3ee" opacity={0.08} speed={1.0} />
+        
+        {/* Glow and Grid Effects */}
+        <div className="absolute inset-0 grid-pattern-fine opacity-15 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-accent-cyan/10 blur-[180px] rounded-full pointer-events-none" />
         
         <div className="max-w-5xl w-full text-center relative z-10 flex flex-col items-center">
           
-          {/* Cyber HUD Element */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             className="mb-8 relative flex items-center justify-center"
           >
-            {/* Spinning radar outline */}
             <div className="absolute w-28 h-28 border border-accent-cyan/20 rounded-full animate-[spin_20s_linear_infinite]" />
-            <div className="absolute w-24 h-24 border-2 border-dashed border-accent-cyan/30 rounded-full animate-[spin_10s_linear_infinite_reverse]" />
+            <div className="absolute w-24 h-24 border-2 border-dashed border-accent-cyan/35 rounded-full animate-[spin_10s_linear_infinite_reverse]" />
             
-            <div className="w-16 h-16 rounded-full bg-[#050b18] border border-accent-cyan flex items-center justify-center text-accent-cyan shadow-[0_0_20px_rgba(34,211,238,0.3)]">
+            <div className="w-16 h-16 rounded-full bg-[#050b18]/90 border border-accent-cyan flex items-center justify-center text-accent-cyan shadow-[0_0_30px_rgba(34,211,238,0.4)]">
               <Shield className="w-8 h-8 animate-pulse" />
             </div>
           </motion.div>
@@ -313,16 +312,16 @@ export default function CyberSecurityPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-white/50 text-xs sm:text-sm font-space tracking-wider mb-10 border-y border-white/5 py-4 px-8 max-w-3xl"
+            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-white/60 text-xs sm:text-sm font-space tracking-wider mb-10 py-2 max-w-3xl"
           >
             <span>Penetration Testing</span>
-            <span className="text-accent-cyan">•</span>
+            <span className="text-accent-cyan font-bold">•</span>
             <span>SOC Analysis</span>
-            <span className="text-accent-cyan">•</span>
+            <span className="text-accent-cyan font-bold">•</span>
             <span>Bug Hunting</span>
-            <span className="text-accent-cyan">•</span>
+            <span className="text-accent-cyan font-bold">•</span>
             <span>VAPT</span>
-            <span className="text-accent-cyan">•</span>
+            <span className="text-accent-cyan font-bold">•</span>
             <span>Cyber Compliance</span>
           </motion.div>
 
@@ -335,7 +334,7 @@ export default function CyberSecurityPage() {
             <h2 className="text-xl sm:text-2xl font-semibold text-white/95 max-w-2xl font-sans tracking-wide">
               Trusted by Professionals. Built for Businesses. Priced for Everyone.
             </h2>
-            <span className="text-xs tracking-[0.3em] font-space text-white/30 uppercase">
+            <span className="text-xs tracking-[0.3em] font-space text-white/40 uppercase">
               Company Profile & Service Guide | 2026
             </span>
           </motion.div>
@@ -348,13 +347,13 @@ export default function CyberSecurityPage() {
           >
             <a
               href="#services"
-              className="px-6 py-3 rounded-full bg-accent-cyan hover:bg-white text-bg-deep font-space text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(34,211,238,0.25)] hover:shadow-white/20"
+              className="px-6 py-3 rounded-full bg-accent-cyan hover:bg-white text-bg-deep font-space text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_25px_rgba(34,211,238,0.3)] hover:shadow-white/20"
             >
               Explore Solutions
             </a>
             <a
               href="#checklist"
-              className="px-6 py-3 rounded-full border border-white/10 hover:border-accent-cyan/40 bg-white/5 text-white hover:text-accent-cyan font-space text-xs font-bold uppercase tracking-wider transition-all duration-300"
+              className="px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 text-white hover:text-accent-cyan font-space text-xs font-bold uppercase tracking-wider transition-all duration-300"
             >
               Security Check
             </a>
@@ -362,17 +361,17 @@ export default function CyberSecurityPage() {
         </div>
         
         {/* Animated Chevron Indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-40">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-50">
           <span className="text-[9px] font-space tracking-widest text-white/60 uppercase mb-2">SCROLL TO SYSTEM DETAILS</span>
           <ChevronDown className="w-4 h-4 animate-bounce text-accent-cyan" />
         </div>
       </section>
 
-      {/* Main Page Layout Grid with Table of Contents Sidebar */}
+      {/* Main Page Layout Grid with Table of Contents Sticky Sidebar */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative">
         
-        {/* Sticky Sidebar Table of Contents */}
-        <aside className="hidden lg:block lg:col-span-3 sticky top-32 max-h-[80vh] overflow-y-auto no-scrollbar pr-4 py-2 border-r border-white/5">
+        {/* FIXED/STICKY Sidebar Table of Contents */}
+        <aside className="hidden lg:block lg:col-span-3 sticky top-28 self-start max-h-[calc(100vh-160px)] overflow-y-auto no-scrollbar pr-4 py-2">
           <p className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase mb-6 flex items-center gap-2">
             <Terminal className="w-3.5 h-3.5" /> SYSTEM DIRECTORY
           </p>
@@ -399,17 +398,17 @@ export default function CyberSecurityPage() {
           </ul>
         </aside>
 
-        {/* Content Area */}
+        {/* Content Area - Stripped of unnecessary borders and lines */}
         <main className="lg:col-span-9 space-y-32">
 
           {/* Section 1. About WhyNotMe27 */}
           <section id="about" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">01 // CORPORATE OVERVIEW</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">About WhyNotMe27</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-                <div className="space-y-4 text-white/70 text-sm leading-relaxed">
+                <div className="space-y-4 text-white/75 text-sm leading-relaxed">
                   <p>
                     WhyNotMe27 is a professional cyber security service provider built around one simple promise: <strong className="text-white font-semibold">your digital assets deserve enterprise-grade protection, delivered by real experts, at a price that makes sense</strong>. We specialize in Penetration Testing, SOC (Security Operations Center) Analysis, and Bug Hunting — the three pillars that keep modern businesses safe from evolving cyber threats.
                   </p>
@@ -421,45 +420,34 @@ export default function CyberSecurityPage() {
                   </p>
                 </div>
 
-                {/* Dark-themed collage mockup element */}
-                <div className="relative border border-white/10 rounded-2xl overflow-hidden min-h-[300px] flex flex-col justify-end p-6 bg-gradient-to-t from-black via-black/80 to-transparent group">
-                  {/* Glowing schematic overlay grid */}
-                  <div className="absolute inset-0 grid-pattern opacity-20" />
+                {/* Generated Collage image element */}
+                <div 
+                  className="relative rounded-3xl overflow-hidden min-h-[300px] flex flex-col justify-end p-6 bg-cover bg-center group shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
+                  style={{ backgroundImage: `url('/services/cyber_about.jpg')` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
                   
-                  {/* Subtle vector security graphic representing analyst monitors */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                    <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="10" y="10" width="80" height="60" rx="4" stroke="#8b5cf6" strokeWidth="0.5" />
-                      <line x1="20" y1="40" x2="80" y2="40" stroke="#ef4444" strokeWidth="0.5" />
-                      <path d="M10 50 L30 30 L50 60 L70 20 L90 50" stroke="#10b981" strokeWidth="0.5" />
-                    </svg>
-                  </div>
-                  
-                  {/* Dark collage background lines */}
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-accent-violet/10 via-black to-black -z-10" />
-                  
-                  {/* Glow effect */}
-                  <div className="absolute -top-10 -right-10 w-40 h-40 bg-accent-cyan/15 blur-[60px] rounded-full" />
-                  
-                  {/* Watermark Logo */}
-                  <div className="absolute top-4 right-4 flex items-center gap-1.5 opacity-40 group-hover:opacity-75 transition-opacity duration-300">
-                    <Shield className="w-3.5 h-3.5 text-accent-cyan" />
-                    <span className="font-space text-[8px] tracking-widest text-white uppercase font-bold">WHYNOTME27 SECURE</span>
+                  {/* Glowing layout items */}
+                  <div className="absolute top-4 right-4 flex items-center gap-1.5 opacity-60 group-hover:opacity-90 transition-opacity duration-300 bg-black/50 backdrop-blur-md py-1 px-2.5 rounded-full">
+                    <Shield className="w-3 h-3 text-accent-cyan" />
+                    <span className="font-space text-[8px] tracking-widest text-white uppercase font-bold">WHYNOTME27 LABS</span>
                   </div>
 
                   <div className="relative z-10 space-y-2">
-                    <span className="text-[9px] font-space text-accent-cyan tracking-widest uppercase bg-accent-cyan/10 py-1 px-2.5 rounded border border-accent-cyan/20 inline-block">SECURITY ANALYST WORKSPACE</span>
-                    <p className="text-white text-sm font-semibold tracking-wide">Threat vectors, network anomalies, and secure patches, verified live.</p>
+                    <span className="text-[9px] font-space text-accent-cyan tracking-widest uppercase bg-accent-cyan/15 py-1 px-2.5 rounded border border-accent-cyan/20 inline-block backdrop-blur-sm">
+                      SECURITY ANALYST WORKSPACE
+                    </span>
+                    <p className="text-white text-sm font-semibold tracking-wide shadow-text">Threat vectors, network anomalies, and secure patches, verified live.</p>
                   </div>
                 </div>
               </div>
 
               {/* Mission & Vision Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
-                <div className="bg-white/5 border border-white/5 rounded-2xl p-6 hover:border-accent-cyan/20 transition-all duration-300 relative overflow-hidden group">
+                <div className="bg-white/[0.02] backdrop-blur-sm rounded-2xl p-6 hover:bg-white/[0.04] transition-all duration-300 relative overflow-hidden group shadow-lg">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-accent-cyan/5 blur-3xl rounded-full" />
                   <div className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-accent-cyan bg-black/40 shrink-0">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-accent-cyan bg-black/50 shrink-0">
                       <TargetIcon className="w-5 h-5" />
                     </div>
                     <div>
@@ -471,10 +459,10 @@ export default function CyberSecurityPage() {
                   </div>
                 </div>
 
-                <div className="bg-white/5 border border-white/5 rounded-2xl p-6 hover:border-accent-violet/20 transition-all duration-300 relative overflow-hidden group">
+                <div className="bg-white/[0.02] backdrop-blur-sm rounded-2xl p-6 hover:bg-white/[0.04] transition-all duration-300 relative overflow-hidden group shadow-lg">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-accent-violet/5 blur-3xl rounded-full" />
                   <div className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-accent-violet bg-black/40 shrink-0">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-accent-violet bg-black/50 shrink-0">
                       <Eye className="w-5 h-5" />
                     </div>
                     <div>
@@ -491,13 +479,13 @@ export default function CyberSecurityPage() {
 
           {/* Section 2. Why Cyber Security Matters Right Now */}
           <section id="threats" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">02 // RISK METRICS & THREATS</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Why Cyber Security Matters Right Now</h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-7 space-y-6">
-                  <p className="text-white/70 text-sm leading-relaxed">
+                  <p className="text-white/75 text-sm leading-relaxed">
                     Cyber threats are no longer a future risk — they are a daily reality. Ransomware, phishing, data breaches, and API exploitation attacks are growing faster than most businesses can defend against them alone. A single unpatched vulnerability can cost a company its data, its reputation, and its customers' trust.
                   </p>
                   
@@ -510,7 +498,7 @@ export default function CyberSecurityPage() {
                       { title: "Double & Triple Extortion", desc: "Backups alone no longer protect. Attackers steal data before encrypting it and threaten public leaks." },
                       { title: "Bug Bounty Growth", desc: "Continuous bug hunting beats yearly audits, as infrastructure, code, and threat patterns evolve daily." }
                     ].map((threat, index) => (
-                      <div key={index} className="border border-white/5 bg-white/[0.02] p-4 rounded-xl relative hover:bg-white/[0.04] transition-colors">
+                      <div key={index} className="bg-white/[0.02] p-4 rounded-xl relative hover:bg-white/[0.04] transition-all duration-300">
                         <div className="w-1.5 h-1.5 bg-accent-cyan rounded-full absolute top-5 left-4" />
                         <div className="pl-5">
                           <h4 className="font-space text-xs font-bold text-white uppercase mb-1">{threat.title}</h4>
@@ -521,65 +509,22 @@ export default function CyberSecurityPage() {
                   </div>
                 </div>
 
-                {/* Infographic Design Grid (WHYNOTME27 Defense Grid) */}
-                <div className="lg:col-span-5 relative bg-black/50 border border-white/10 rounded-2xl p-6 aspect-[4/3] flex flex-col justify-between overflow-hidden">
-                  {/* Glowing Radar Background */}
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent-cyan/5 via-transparent to-transparent -z-10" />
+                {/* Generated Infographic Image (Global Cyber Security Threat Map) */}
+                <div 
+                  className="lg:col-span-5 relative rounded-2xl p-6 aspect-[4/3] flex flex-col justify-between overflow-hidden bg-cover bg-center shadow-2xl"
+                  style={{ backgroundImage: `url('/services/cyber_threat.jpg')` }}
+                >
+                  <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
                   
-                  {/* Defense grid lines */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-25">
-                    <div className="w-56 h-56 border border-red-500/20 rounded-full animate-ping" />
-                    <div className="w-40 h-40 border border-accent-cyan/20 rounded-full absolute" />
-                    <div className="w-24 h-24 border border-dashed border-accent-cyan/30 rounded-full absolute" />
-                    {/* Pulsing lines */}
-                    <div className="w-full h-[0.5px] bg-white/5 absolute top-1/2 left-0" />
-                    <div className="h-full w-[0.5px] bg-white/5 absolute left-1/2 top-0" />
-                  </div>
-
-                  <div className="flex justify-between items-center text-[9px] font-space text-white/40 border-b border-white/5 pb-2">
-                    <span>LIVE DEFENSE MATRIX</span>
-                    <span className="text-red-400 animate-pulse flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-red-400 inline-block" /> ATTACK VECTOR DETECTED
+                  <div className="relative z-10 flex justify-between items-center text-[9px] font-space text-white/80 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full w-full">
+                    <span>LIVE GLOBAL DEFENSE MATRIX</span>
+                    <span className="text-red-400 font-bold animate-pulse flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-400 inline-block" /> ATTACK SCANNING ACTIVE
                     </span>
                   </div>
 
-                  {/* Visual nodes representing threat map */}
-                  <div className="relative h-full flex items-center justify-center my-4">
-                    {/* Center Node */}
-                    <div className="absolute z-10 w-12 h-12 bg-bg-deep border-2 border-accent-cyan rounded-full flex items-center justify-center text-accent-cyan shadow-[0_0_15px_rgba(34,211,238,0.4)]">
-                      <Shield className="w-6 h-6" />
-                    </div>
-                    <span className="absolute mt-16 font-space text-[9px] font-bold text-accent-cyan tracking-wider">DEFENSE GRID</span>
-                    
-                    {/* Converging red attack nodes */}
-                    <div className="absolute top-4 left-6 flex flex-col items-center">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-                      <span className="font-space text-[8px] text-white/30 uppercase mt-1">Ransomware</span>
-                      {/* Line to center */}
-                      <svg className="w-16 h-12 text-red-500/35 overflow-visible"><line x1="0" y1="0" x2="64" y2="48" stroke="currentColor" strokeDasharray="3" strokeWidth="1" /></svg>
-                    </div>
-
-                    <div className="absolute top-4 right-10 flex flex-col items-center">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-                      <span className="font-space text-[8px] text-white/30 uppercase mt-1">Phishing</span>
-                      <svg className="w-16 h-12 text-red-500/35 overflow-visible"><line x1="64" y1="0" x2="0" y2="48" stroke="currentColor" strokeDasharray="3" strokeWidth="1" /></svg>
-                    </div>
-
-                    <div className="absolute bottom-6 left-12 flex flex-col items-center">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-                      <span className="font-space text-[8px] text-white/30 uppercase mt-1">Data Leaks</span>
-                      <svg className="w-16 h-12 text-red-500/35 overflow-visible"><line x1="0" y1="48" x2="64" y2="0" stroke="currentColor" strokeDasharray="3" strokeWidth="1" /></svg>
-                    </div>
-
-                    <div className="absolute bottom-4 right-8 flex flex-col items-center">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-                      <span className="font-space text-[8px] text-white/30 uppercase mt-1">Malware</span>
-                      <svg className="w-16 h-12 text-red-500/35 overflow-visible"><line x1="64" y1="48" x2="0" y2="0" stroke="currentColor" strokeDasharray="3" strokeWidth="1" /></svg>
-                    </div>
-                  </div>
-
-                  <div className="text-[8px] font-space text-white/30 text-center uppercase tracking-widest border-t border-white/5 pt-2">
-                    WhyNotMe27 Shield active // 2026 threats blocked
+                  <div className="relative z-10 text-[8px] font-space text-white/80 text-center uppercase tracking-widest bg-black/65 backdrop-blur-md py-1.5 rounded-lg border border-white/5">
+                    WhyNotMe27 Shield active // Real-time threat defense
                   </div>
                 </div>
               </div>
@@ -588,7 +533,7 @@ export default function CyberSecurityPage() {
 
           {/* Section 3. Our Core Services */}
           <section id="services" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">03 // SERVICE CAPABILITIES</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Our Core Services</h2>
               <p className="text-white/60 text-sm leading-relaxed max-w-3xl mb-10">
@@ -596,7 +541,7 @@ export default function CyberSecurityPage() {
               </p>
 
               {/* Interactive Tabs Interface */}
-              <div className="flex flex-wrap gap-2 border-b border-white/5 pb-4 mb-8">
+              <div className="flex flex-wrap gap-2 pb-4 mb-8">
                 {coreServices.map((svc) => {
                   const Icon = svc.icon;
                   return (
@@ -605,7 +550,7 @@ export default function CyberSecurityPage() {
                       onClick={() => setActiveTab(svc.id)}
                       className={`flex items-center gap-2 px-5 py-3 rounded-xl font-space text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
                         activeTab === svc.id
-                          ? "bg-accent-cyan text-bg-deep shadow-[0_0_15px_rgba(34,211,238,0.2)]"
+                          ? "bg-accent-cyan text-bg-deep shadow-[0_0_20px_rgba(34,211,238,0.25)]"
                           : "bg-white/5 text-white/60 hover:text-white hover:bg-white/10"
                       }`}
                     >
@@ -617,7 +562,7 @@ export default function CyberSecurityPage() {
               </div>
 
               {/* Tab Display Panel */}
-              <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-8 relative overflow-hidden">
+              <div className="bg-white/[0.02] rounded-2xl p-8 relative overflow-hidden shadow-xl">
                 <div className="absolute top-0 right-0 w-80 h-80 bg-accent-cyan/5 blur-[120px] rounded-full pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent-violet/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -636,7 +581,7 @@ export default function CyberSecurityPage() {
                       >
                         <div className="lg:col-span-7 space-y-6">
                           <div className="flex items-center gap-3.5">
-                            <div className="w-12 h-12 rounded-xl border border-accent-cyan/20 flex items-center justify-center bg-accent-cyan/10 text-accent-cyan">
+                            <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-accent-cyan/10 text-accent-cyan">
                               <Icon className="w-6 h-6" />
                             </div>
                             <h3 className="font-space text-xl font-bold uppercase text-white tracking-wide">
@@ -644,7 +589,7 @@ export default function CyberSecurityPage() {
                             </h3>
                           </div>
                           
-                          <p className="text-white/70 text-sm leading-relaxed">
+                          <p className="text-white/75 text-sm leading-relaxed">
                             {svc.desc}
                           </p>
 
@@ -661,9 +606,9 @@ export default function CyberSecurityPage() {
                           </div>
                         </div>
 
-                        {/* Interactive HUD Visual Overlay matched to image description */}
-                        <div className="lg:col-span-5 border border-white/5 bg-black/60 rounded-xl p-6 font-space text-[10px] text-white/50 space-y-4">
-                          <div className="flex justify-between border-b border-white/10 pb-2">
+                        {/* Interactive HUD Visual Overlay */}
+                        <div className="lg:col-span-5 bg-black/60 rounded-2xl p-6 font-space text-[10px] text-white/50 space-y-4 shadow-lg border border-white/[0.03]">
+                          <div className="flex justify-between border-b border-white/5 pb-2">
                             <span>MODULE STATUS</span>
                             <span className="text-accent-cyan font-bold animate-pulse">ACTIVE SECURITY MODULE</span>
                           </div>
@@ -671,27 +616,27 @@ export default function CyberSecurityPage() {
                           {activeTab === "vapt" && (
                             <div className="space-y-3 font-mono">
                               <p className="text-accent-lime">// AUTHORIZED PENETRATION SEQUENCE</p>
-                              <div className="bg-black/50 p-3 rounded border border-white/5 text-[9px] text-white/40 space-y-1">
+                              <div className="bg-black/50 p-3 rounded-xl text-[9px] text-white/40 space-y-1">
                                 <p>$ nmap -sC -sV -O target-app.com</p>
                                 <p className="text-accent-cyan">PORT 80/TCP  OPEN  HTTP  Nginx 1.25.1</p>
                                 <p className="text-accent-cyan">PORT 443/TCP OPEN  HTTPS Nginx 1.25.1</p>
                                 <p className="text-red-400">WARNING: VULNERABILITY CVE-2026-X VERIFIED</p>
                               </div>
-                              <p className="text-white/30 text-[9px]">We simulate realistic, ethical hacks to patch real vulnerabilities safely.</p>
+                              <p className="text-white/40 text-[9px]">We simulate realistic, ethical hacks to patch real vulnerabilities safely.</p>
                             </div>
                           )}
 
                           {activeTab === "soc" && (
                             <div className="space-y-3">
-                              <div className="flex justify-between items-center bg-black/40 p-2.5 rounded border border-white/5">
+                              <div className="flex justify-between items-center bg-black/40 p-2.5 rounded-xl">
                                 <span>SIEM Logs Analyzed/sec</span>
                                 <span className="font-bold text-accent-cyan">18,452</span>
                               </div>
-                              <div className="flex justify-between items-center bg-black/40 p-2.5 rounded border border-white/5">
+                              <div className="flex justify-between items-center bg-black/40 p-2.5 rounded-xl">
                                 <span>Threat Triage Dashboard</span>
                                 <span className="font-bold text-accent-lime">100% Operational</span>
                               </div>
-                              <div className="flex items-center gap-2 text-[9px] text-accent-cyan bg-accent-cyan/5 border border-accent-cyan/15 p-2 rounded">
+                              <div className="flex items-center gap-2 text-[9px] text-accent-cyan bg-accent-cyan/5 p-2 rounded-xl">
                                 <Activity className="w-3.5 h-3.5 animate-pulse shrink-0" />
                                 <span>Root cause telemetry active on all server nodes</span>
                               </div>
@@ -701,7 +646,7 @@ export default function CyberSecurityPage() {
                           {activeTab === "bughunting" && (
                             <div className="space-y-3">
                               <p className="text-accent-cyan">// CREATIVE FLUSH OUTS</p>
-                              <div className="bg-black/50 p-3 rounded border border-white/5 text-[9px] text-white/40 space-y-1">
+                              <div className="bg-black/50 p-3 rounded-xl text-[9px] text-white/40 space-y-1">
                                 <p className="font-bold text-white">FINDINGS COUNT // CYBER RESEARCHERS</p>
                                 <p>• Business Logic bypass (Cart pricing manipulation)</p>
                                 <p>• Critical IDOR leading to data exposure</p>
@@ -722,18 +667,18 @@ export default function CyberSecurityPage() {
 
                           {activeTab === "compliance" && (
                             <div className="grid grid-cols-2 gap-2 text-[9px]">
-                              <div className="border border-white/5 bg-black/40 p-2 rounded text-center">
+                              <div className="bg-black/40 p-2.5 rounded-xl text-center">
                                 <span className="text-accent-cyan block font-bold">SOC 2 READY</span>
-                                <span className="text-white/30">Gap audits done</span>
+                                <span className="text-white/35">Gap audits done</span>
                               </div>
-                              <div className="border border-white/5 bg-black/40 p-2 rounded text-center">
+                              <div className="bg-black/40 p-2.5 rounded-xl text-center">
                                 <span className="text-accent-cyan block font-bold">ISO 27001</span>
-                                <span className="text-white/30">Policies mapped</span>
+                                <span className="text-white/35">Policies mapped</span>
                               </div>
                             </div>
                           )}
                           
-                          <div className="flex justify-between items-center text-[9px] border-t border-white/10 pt-2 text-white/30">
+                          <div className="flex justify-between items-center text-[9px] border-t border-white/5 pt-2 text-white/30">
                             <span>WHYNOTME27 ANALYTICAL SUITE</span>
                             <span>VER // 2.0.26</span>
                           </div>
@@ -746,9 +691,9 @@ export default function CyberSecurityPage() {
             </div>
           </section>
 
-          {/* Section 4. Our Proven Process */}
+          {/* Section 4. Our Proven Process (WITH BACKGROUND IMAGE) */}
           <section id="process" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">04 // PIPELINE METHODOLOGY</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Our Proven Process</h2>
               
@@ -757,10 +702,16 @@ export default function CyberSecurityPage() {
                 {processSteps.map((step, idx) => (
                   <div 
                     key={idx} 
-                    className="bg-white/[0.02] border border-white/5 hover:border-accent-cyan/30 rounded-2xl p-6 transition-all duration-300 relative group flex flex-col justify-between"
+                    className="relative rounded-3xl p-6 transition-all duration-300 overflow-hidden group flex flex-col justify-between min-h-[180px] shadow-lg"
                   >
+                    {/* Low transparency background image */}
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center opacity-[0.05] group-hover:opacity-[0.10] transition-opacity duration-300 -z-20"
+                      style={{ backgroundImage: `url('/services/cyber_process.jpg')` }}
+                    />
+                    <div className="absolute inset-0 bg-white/[0.01] group-hover:bg-white/[0.03] transition-all -z-10" />
+
                     <div>
-                      {/* Connection Light-Trail (on hover effects) */}
                       <div className="absolute top-6 right-6 font-space text-xs font-black text-white/20 group-hover:text-accent-cyan transition-colors">
                         {step.step}
                       </div>
@@ -768,41 +719,50 @@ export default function CyberSecurityPage() {
                       <h3 className="font-space text-sm font-bold text-white uppercase tracking-wider mb-2 pr-6">
                         {step.name}
                       </h3>
-                      <p className="text-white/50 text-xs leading-relaxed font-sans">
+                      <p className="text-white/55 text-xs leading-relaxed font-sans">
                         {step.desc}
                       </p>
                     </div>
 
                     {/* Step bottom neon bar */}
-                    <div className="w-0 group-hover:w-full h-[2px] bg-accent-cyan transition-all duration-500 absolute bottom-0 left-0 rounded-b-2xl" />
+                    <div className="w-0 group-hover:w-full h-[2px] bg-accent-cyan transition-all duration-500 absolute bottom-0 left-0 rounded-b-3xl" />
                   </div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Section 5. Top Vulnerabilities Regularly Discovers */}
+          {/* Section 5. Top Vulnerabilities Regularly Discovers (WITH BACKGROUND IMAGE) */}
           <section id="vulnerabilities" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">05 // COMMON FINDINGS DICTIONARY</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Top Vulnerabilities Our Team Regularly Discovers</h2>
               <p className="text-white/60 text-sm leading-relaxed max-w-3xl mb-12">
                 Across hundreds of hours of penetration testing and bug hunting, certain vulnerability classes appear again and again. Understanding them helps businesses appreciate exactly what our testing protects against.
               </p>
 
-              {/* Honeycomb/Honeycomb-like Grid */}
+              {/* Grid layout */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {vulnerabilitiesList.map((vuln, idx) => (
-                  <div key={idx} className="bg-white/[0.01] border border-white/5 rounded-2xl p-6 hover:bg-white/[0.03] hover:border-red-500/20 transition-all duration-300 relative group">
-                    {/* Glowing Red Warning Glyph */}
-                    <div className="absolute top-4 right-4 w-6 h-6 rounded-full border border-red-500/10 flex items-center justify-center text-red-500 group-hover:bg-red-500/10 transition-colors">
+                  <div 
+                    key={idx} 
+                    className="relative rounded-3xl p-6 transition-all duration-300 overflow-hidden group shadow-lg"
+                  >
+                    {/* Low transparency background image */}
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center opacity-[0.05] group-hover:opacity-[0.10] transition-opacity duration-300 -z-20"
+                      style={{ backgroundImage: `url('/cyber_foundation_bg.jpg')` }}
+                    />
+                    <div className="absolute inset-0 bg-white/[0.01] group-hover:bg-white/[0.03] transition-all -z-10" />
+
+                    <div className="absolute top-4 right-4 w-6 h-6 rounded-full flex items-center justify-center text-red-500 group-hover:bg-red-500/10 transition-colors">
                       <AlertCircle className="w-3.5 h-3.5" />
                     </div>
 
                     <h3 className="font-space text-xs font-bold text-white uppercase tracking-wider mb-2 pr-6">
                       {vuln.name}
                     </h3>
-                    <p className="text-white/50 text-[11px] leading-relaxed">
+                    <p className="text-white/55 text-[11px] leading-relaxed">
                       {vuln.desc}
                     </p>
                   </div>
@@ -811,9 +771,9 @@ export default function CyberSecurityPage() {
             </div>
           </section>
 
-          {/* Section 6. What You Receive — Our Deliverables */}
+          {/* Section 6. What You Receive — Our Deliverables (WITH BACKGROUND IMAGE) */}
           <section id="deliverables" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">06 // DOCUMENTATION PACKAGE</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">What You Receive — Our Deliverables</h2>
               
@@ -827,9 +787,18 @@ export default function CyberSecurityPage() {
                   { title: "Re-Testing Report", desc: "Verification logs from a final validation sweep confirming that previous patches successfully neutralized all threat vectors." },
                   { title: "Security Certificate", desc: "A formal, shareable WhyNotMe27 security certificate to showcase compliance to investors, board members, and clients." }
                 ].map((item, idx) => (
-                  <div key={idx} className="bg-white/5 border border-white/5 p-6 rounded-2xl hover:border-accent-cyan/20 transition-all duration-300 relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-accent-cyan/5 blur-3xl rounded-full" />
-                    <div className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-accent-cyan bg-black/40 mb-4">
+                  <div 
+                    key={idx} 
+                    className="relative rounded-3xl p-6 transition-all duration-300 overflow-hidden group shadow-lg"
+                  >
+                    {/* Low transparency background image */}
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center opacity-[0.05] group-hover:opacity-[0.10] transition-opacity duration-300 -z-20"
+                      style={{ backgroundImage: `url('/services/cybersecurity_bg.jpg')` }}
+                    />
+                    <div className="absolute inset-0 bg-white/[0.01] group-hover:bg-white/[0.03] transition-all -z-10" />
+
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-accent-cyan bg-black/40 mb-4">
                       <FileText className="w-5 h-5" />
                     </div>
                     <h3 className="font-space text-xs font-bold text-white uppercase tracking-wider mb-2">
@@ -844,9 +813,9 @@ export default function CyberSecurityPage() {
             </div>
           </section>
 
-          {/* Section 7. Flexible Engagement Models */}
+          {/* Section 7. Flexible Engagement Models (WITH BACKGROUND IMAGE) */}
           <section id="engagement" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">07 // PARTNERSHIP MODELS</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Flexible Engagement Models</h2>
               
@@ -857,15 +826,25 @@ export default function CyberSecurityPage() {
                   { title: "Managed SOC-as-a-Service", desc: "Continuous, always-on SOC monitoring and SIEM log threat detection managed by our expert analysts around the clock.", badge: "24x7 GUARD" },
                   { title: "Continuous Bug Hunting", desc: "Ongoing private bug bounty sprints, where our security researchers continuously probe live platforms for hidden logic exploits.", badge: "CONTINUOUS" }
                 ].map((model, idx) => (
-                  <div key={idx} className="bg-white/[0.02] border border-white/5 hover:border-accent-cyan/30 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between h-full relative group">
+                  <div 
+                    key={idx} 
+                    className="relative rounded-3xl p-6 transition-all duration-300 overflow-hidden group flex flex-col justify-between min-h-[220px] shadow-lg"
+                  >
+                    {/* Low transparency background image */}
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center opacity-[0.05] group-hover:opacity-[0.10] transition-opacity duration-300 -z-20"
+                      style={{ backgroundImage: `url('/security_first_bg.jpg')` }}
+                    />
+                    <div className="absolute inset-0 bg-white/[0.01] group-hover:bg-white/[0.03] transition-all -z-10" />
+
                     <div>
-                      <span className="text-[8px] font-space text-accent-cyan tracking-widest uppercase bg-accent-cyan/10 border border-accent-cyan/20 py-0.5 px-2 rounded mb-4 inline-block">
+                      <span className="text-[8px] font-space text-accent-cyan tracking-widest uppercase bg-accent-cyan/15 border border-accent-cyan/20 py-0.5 px-2 rounded mb-4 inline-block">
                         {model.badge}
                       </span>
                       <h3 className="font-space text-sm font-bold text-white uppercase tracking-wider mb-2">
                         {model.title}
                       </h3>
-                      <p className="text-white/50 text-xs leading-relaxed">
+                      <p className="text-white/55 text-xs leading-relaxed">
                         {model.desc}
                       </p>
                     </div>
@@ -882,13 +861,13 @@ export default function CyberSecurityPage() {
 
           {/* Section 8. Our Team & Expertise */}
           <section id="team" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">08 // EXPERT RECON TEAM</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Our Team & Expertise</h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-7 space-y-6">
-                  <p className="text-white/70 text-sm leading-relaxed">
+                  <p className="text-white/75 text-sm leading-relaxed">
                     WhyNotMe27 is built on a simple belief — real security comes from real expertise, not just automated tools. Our analysts and testers bring hands-on experience across penetration testing, SOC operations, and bug hunting, working as a tightly coordinated team rather than isolated specialists.
                   </p>
                   
@@ -916,10 +895,9 @@ export default function CyberSecurityPage() {
                 </div>
 
                 {/* Team visual mock node */}
-                <div className="lg:col-span-5 bg-white/[0.02] border border-white/5 rounded-2xl p-6 relative aspect-square flex flex-col justify-end overflow-hidden group">
+                <div className="lg:col-span-5 bg-white/[0.02] rounded-3xl p-6 relative aspect-square flex flex-col justify-end overflow-hidden group shadow-lg">
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10" />
                   
-                  {/* Glowing cyber graphic representation of professional operations center */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
                     <div className="w-48 h-48 border border-accent-cyan/35 rounded-full absolute animate-[spin_40s_linear_infinite]" />
                     <div className="w-36 h-36 border border-accent-violet/30 rounded-full absolute animate-[spin_20s_linear_infinite_reverse]" />
@@ -927,7 +905,7 @@ export default function CyberSecurityPage() {
                   </div>
 
                   <div className="relative z-20 space-y-3">
-                    <span className="text-[9px] font-space text-accent-cyan tracking-widest uppercase bg-accent-cyan/10 border border-accent-cyan/20 py-0.5 px-2 rounded inline-block">
+                    <span className="text-[9px] font-space text-accent-cyan tracking-widest uppercase bg-accent-cyan/15 py-0.5 px-2.5 rounded inline-block">
                       OPERATIONS ROOM MONITOR
                     </span>
                     <h4 className="font-space text-sm font-bold text-white uppercase tracking-wider">
@@ -942,9 +920,9 @@ export default function CyberSecurityPage() {
             </div>
           </section>
 
-          {/* Section 9. Free Cyber Security Checklist for Businesses (INTERACTIVE) */}
+          {/* Section 9. Free Cyber Security Checklist for Businesses */}
           <section id="checklist" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">09 // SECURITY COMPLIANCE CHECKLIST</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Free Cyber Security Checklist for Businesses</h2>
               
@@ -961,10 +939,10 @@ export default function CyberSecurityPage() {
                       <div 
                         key={item.id} 
                         onClick={() => handleChecklistToggle(item.id)}
-                        className={`flex gap-3 items-start p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
+                        className={`flex gap-3 items-start p-4 rounded-2xl transition-all duration-200 cursor-pointer ${
                           item.checked 
-                            ? "bg-accent-cyan/5 border-accent-cyan/25" 
-                            : "bg-white/[0.01] border-white/5 hover:border-white/15"
+                            ? "bg-accent-cyan/5" 
+                            : "bg-white/[0.01] hover:bg-white/[0.03]"
                         }`}
                       >
                         <div className={`w-5 h-5 rounded border flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
@@ -992,13 +970,12 @@ export default function CyberSecurityPage() {
                 </div>
 
                 {/* Score and CTA Sidebar */}
-                <div className="lg:col-span-5 bg-white/[0.02] border border-white/10 rounded-2xl p-6 sticky top-36 space-y-6">
+                <div className="lg:col-span-5 bg-white/[0.02] rounded-3xl p-6 sticky top-36 space-y-6 shadow-xl">
                   <h3 className="font-space text-xs font-bold text-white uppercase tracking-wider border-b border-white/5 pb-3">
                     YOUR SECURITY SCORE
                   </h3>
 
-                  <div className="text-center py-6 space-y-2 bg-black/40 rounded-xl border border-white/5 relative overflow-hidden">
-                    {/* Background glow based on score */}
+                  <div className="text-center py-6 space-y-2 bg-black/40 rounded-2xl relative overflow-hidden">
                     <div className={`absolute inset-0 blur-3xl opacity-15 rounded-full transition-colors ${
                       threatScore > 50 ? "bg-red-500" : threatScore > 20 ? "bg-amber-500" : "bg-emerald-500"
                     }`} />
@@ -1039,7 +1016,7 @@ export default function CyberSecurityPage() {
 
                   <a 
                     href="#get-started"
-                    className="block w-full text-center py-3 rounded-xl bg-accent-cyan hover:bg-white text-bg-deep font-space text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_15px_rgba(34,211,238,0.2)]"
+                    className="block w-full text-center py-3 rounded-xl bg-accent-cyan hover:bg-white text-bg-deep font-space text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_15px_rgba(34,211,238,0.25)]"
                   >
                     Secure Audit Consult
                   </a>
@@ -1050,7 +1027,7 @@ export default function CyberSecurityPage() {
 
           {/* Section 10. Tools & Technologies We Use */}
           <section id="tools" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">10 // AUDIT STACK</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Tools & Technologies We Use</h2>
               
@@ -1062,7 +1039,7 @@ export default function CyberSecurityPage() {
                 {toolsList.map((tool, idx) => (
                   <div 
                     key={idx} 
-                    className="bg-white/5 border border-white/5 hover:border-accent-cyan/30 py-2 px-4 rounded-xl flex items-center gap-2 group transition-all duration-300"
+                    className="bg-white/5 hover:bg-white/10 py-2.5 px-4 rounded-xl flex items-center gap-2 group transition-all duration-300 shadow-md"
                   >
                     <Terminal className="w-3.5 h-3.5 text-accent-cyan opacity-60 group-hover:opacity-100 transition-opacity" />
                     <div>
@@ -1081,7 +1058,7 @@ export default function CyberSecurityPage() {
 
           {/* Section 11. Industries We Serve */}
           <section id="industries" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">11 // DOMAIN SPECIALIZATION</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Industries We Serve</h2>
               
@@ -1091,9 +1068,9 @@ export default function CyberSecurityPage() {
                   return (
                     <div 
                       key={idx} 
-                      className="bg-white/[0.01] border border-white/5 p-4 rounded-2xl hover:border-accent-cyan/30 text-center flex flex-col items-center justify-center transition-all duration-300 relative group"
+                      className="bg-white/[0.01] p-4 rounded-3xl hover:bg-white/[0.03] text-center flex flex-col items-center justify-center transition-all duration-300 relative group shadow-md"
                     >
-                      <div className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-accent-cyan bg-black/40 mb-3 group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center text-accent-cyan bg-black/50 mb-3 group-hover:scale-110 transition-transform">
                         <Icon className="w-5 h-5" />
                       </div>
                       <span className="font-space text-[10px] font-bold text-white uppercase tracking-wider leading-tight">
@@ -1108,7 +1085,7 @@ export default function CyberSecurityPage() {
 
           {/* Section 12. Why Choose WhyNotMe27 */}
           <section id="why-choose" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">12 // VALUE PROPOSITION</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Why Choose WhyNotMe27</h2>
               
@@ -1121,14 +1098,14 @@ export default function CyberSecurityPage() {
                   { title: "Actionable Guidance", desc: "Findings explained in plain language, with developer-friendly step-by-step patch guidelines." },
                   { title: "Strict Confidentiality", desc: "NDA-backed agreements with zero customer details shared, ever." }
                 ].map((item, idx) => (
-                  <div key={idx} className="bg-white/[0.02] border border-white/5 p-5 rounded-2xl hover:border-accent-cyan/20 transition-all duration-300">
-                    <div className="w-8 h-8 rounded-lg border border-accent-cyan/20 flex items-center justify-center text-accent-cyan bg-accent-cyan/5 mb-4">
+                  <div key={idx} className="bg-white/[0.02] p-5 rounded-3xl hover:bg-white/[0.04] transition-all duration-300 shadow-md">
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center text-accent-cyan bg-accent-cyan/10 mb-4">
                       <CheckCircle2 className="w-4.5 h-4.5" />
                     </div>
                     <h3 className="font-space text-xs font-bold text-white uppercase tracking-wider mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-white/60 text-[11px] leading-relaxed">
+                    <p className="text-white/65 text-[11px] leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
@@ -1139,14 +1116,14 @@ export default function CyberSecurityPage() {
 
           {/* Section 13. Affordable Pricing Plans */}
           <section id="pricing" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">13 // BUDGET MATRIX</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Affordable Pricing Plans</h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
                 
                 {/* Starter Shield */}
-                <div className="bg-white/[0.01] border border-white/5 rounded-3xl p-8 flex flex-col justify-between hover:border-white/10 transition-all relative">
+                <div className="bg-white/[0.01] rounded-3xl p-8 flex flex-col justify-between hover:bg-white/[0.02] transition-all relative shadow-xl">
                   <div className="space-y-6">
                     <div className="flex justify-between items-start">
                       <div>
@@ -1177,8 +1154,8 @@ export default function CyberSecurityPage() {
                   </a>
                 </div>
 
-                {/* Business Guard (Popular) */}
-                <div className="bg-gradient-to-b from-accent-cyan/10 to-transparent border-2 border-accent-cyan rounded-3xl p-8 flex flex-col justify-between hover:shadow-[0_0_30px_rgba(34,211,238,0.05)] transition-all relative">
+                {/* Business Guard */}
+                <div className="bg-gradient-to-b from-accent-cyan/15 to-transparent border border-accent-cyan/50 rounded-3xl p-8 flex flex-col justify-between hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] transition-all relative shadow-2xl">
                   <div className="absolute top-0 right-8 -translate-y-1/2 bg-accent-cyan text-bg-deep font-space text-[9px] font-bold uppercase py-1 px-3 rounded-full tracking-widest">
                     RECOMMENDED
                   </div>
@@ -1208,14 +1185,14 @@ export default function CyberSecurityPage() {
 
                   <a 
                     href="#get-started" 
-                    className="block w-full text-center py-3 rounded-xl bg-accent-cyan hover:bg-white text-bg-deep font-space text-xs font-bold uppercase tracking-wider transition-all duration-300 mt-8 shadow-[0_0_15px_rgba(34,211,238,0.25)]"
+                    className="block w-full text-center py-3 rounded-xl bg-accent-cyan hover:bg-white text-bg-deep font-space text-xs font-bold uppercase tracking-wider transition-all duration-300 mt-8 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
                   >
                     Get Proposal
                   </a>
                 </div>
 
                 {/* Enterprise Fortress */}
-                <div className="bg-white/[0.01] border border-white/5 rounded-3xl p-8 flex flex-col justify-between hover:border-white/10 transition-all relative">
+                <div className="bg-white/[0.01] rounded-3xl p-8 flex flex-col justify-between hover:bg-white/[0.02] transition-all relative shadow-xl">
                   <div className="space-y-6">
                     <div className="flex justify-between items-start">
                       <div>
@@ -1257,7 +1234,7 @@ export default function CyberSecurityPage() {
 
           {/* Section 14. Standards & Best Practices We Follow */}
           <section id="standards" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">14 // METHODOLOGY ALIGNMENT</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Standards & Best Practices We Follow</h2>
               
@@ -1270,7 +1247,7 @@ export default function CyberSecurityPage() {
                   { title: "CVSS v3.1", desc: "Vulnerability weights" },
                   { title: "ISO/IEC 27001", desc: "Best practices alignment" }
                 ].map((std, idx) => (
-                  <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded-xl text-center group hover:border-accent-cyan/20 transition-all duration-300">
+                  <div key={idx} className="bg-white/5 p-4 rounded-2xl text-center group hover:bg-white/10 transition-all duration-300 shadow-md">
                     <span className="font-space text-xs font-black text-white uppercase block mb-1 group-hover:text-accent-cyan transition-colors">
                       {std.title}
                     </span>
@@ -1285,7 +1262,7 @@ export default function CyberSecurityPage() {
 
           {/* Section 15. What Our Clients Say */}
           <section id="testimonials" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">15 // AUDITED VERDICTS</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">What Our Clients Say</h2>
               
@@ -1295,8 +1272,7 @@ export default function CyberSecurityPage() {
                   { quote: "We were skeptical about affordable pricing meaning lower quality — WhyNotMe27 proved us wrong. Their SOC monitoring caught an intrusion attempt within minutes.", author: "CTO, E-Commerce Business", stars: 5 },
                   { quote: "Their bug hunting sprint found issues our internal team had missed for months. Highly recommended for any growing business.", author: "Product Manager, Fintech Startup", stars: 5 }
                 ].map((testi, idx) => (
-                  <div key={idx} className="bg-white/[0.01] border border-white/5 p-6 rounded-2xl relative flex flex-col justify-between">
-                    {/* Testimonial rating stars in gold as per image idea */}
+                  <div key={idx} className="bg-white/[0.01] p-6 rounded-3xl relative flex flex-col justify-between shadow-xl">
                     <div className="flex gap-1 mb-4">
                       {Array(testi.stars).fill(0).map((_, starIdx) => (
                         <span key={starIdx} className="text-amber-400 text-xs">★</span>
@@ -1311,7 +1287,6 @@ export default function CyberSecurityPage() {
                       {testi.author}
                     </div>
 
-                    {/* Cyan quote watermark */}
                     <span className="absolute bottom-4 right-6 text-5xl font-serif text-accent-cyan/5 select-none pointer-events-none">
                       ”
                     </span>
@@ -1326,14 +1301,14 @@ export default function CyberSecurityPage() {
 
           {/* Section 16. Sample Case Study */}
           <section id="casestudy" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">16 // THREAT RESOLVED DEEP DIVE</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Sample Case Study</h2>
               
-              <div className="bg-white/[0.01] border border-white/5 rounded-3xl p-8 relative overflow-hidden">
+              <div className="bg-white/[0.01] rounded-3xl p-8 relative overflow-hidden shadow-2xl">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-accent-cyan/5 blur-[120px] rounded-full pointer-events-none" />
                 
-                <span className="text-[9px] font-space tracking-widest text-accent-cyan uppercase bg-accent-cyan/10 border border-accent-cyan/20 py-0.5 px-2 rounded.inline-block">
+                <span className="text-[9px] font-space tracking-widest text-accent-cyan uppercase bg-accent-cyan/15 border border-accent-cyan/20 py-0.5 px-2 rounded inline-block">
                   E-COMMERCE & PAYMENT INTEGRATIONS
                 </span>
 
@@ -1343,7 +1318,7 @@ export default function CyberSecurityPage() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-6">
                   
-                  <div className="lg:col-span-7 space-y-4 text-xs text-white/70 leading-relaxed font-sans">
+                  <div className="lg:col-span-7 space-y-4 text-xs text-white/75 leading-relaxed font-sans">
                     <p>
                       A mid-sized e-commerce client approached WhyNotMe27 for a routine web application penetration test ahead of a major sale event. During manual testing, our team identified a critical business-logic flaw in the payment gateway integration that could have allowed attackers to manipulate order totals. 
                     </p>
@@ -1351,7 +1326,7 @@ export default function CyberSecurityPage() {
                       The issue was reported within 48 hours with a full proof-of-concept and remediation steps. The client's development team patched the flaw before the sale went live, preventing what could have been a significant financial loss.
                     </p>
                     
-                    <div className="bg-black/50 p-4 rounded-xl border border-white/5 space-y-2 mt-6">
+                    <div className="bg-black/50 p-4 rounded-2xl space-y-2 mt-6">
                       <h4 className="font-space text-[9px] tracking-widest text-white/50 uppercase">AUDIT METRICS RESOLVED</h4>
                       <ul className="grid grid-cols-2 gap-2 text-[10px] font-mono">
                         <li className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-accent-cyan" /> 1 Critical Exploit Fixed</li>
@@ -1363,7 +1338,7 @@ export default function CyberSecurityPage() {
                   </div>
 
                   {/* Before/After visual mockup card */}
-                  <div className="lg:col-span-5 border border-white/5 bg-black/60 p-6 rounded-2xl flex flex-col justify-between h-full font-mono text-[9px] relative overflow-hidden">
+                  <div className="lg:col-span-5 bg-black/60 p-6 rounded-2xl flex flex-col justify-between h-full font-mono text-[9px] relative overflow-hidden shadow-lg">
                     <div className="space-y-4">
                       <span className="text-[8px] font-space text-white/30 uppercase tracking-widest block border-b border-white/5 pb-2">INTEGRATION FLOW ENCRYPTION</span>
                       
@@ -1373,7 +1348,7 @@ export default function CyberSecurityPage() {
                           <span>STAGE 01: ORDER SUBMISSION</span>
                           <span className="flex items-center gap-1"><AlertTriangle className="w-3 h-3" /> VULNERABLE</span>
                         </div>
-                        <div className="bg-red-500/5 border border-red-500/20 p-2.5 rounded text-white/50 text-[8px] space-y-1">
+                        <div className="bg-red-500/5 border border-red-500/20 p-2.5 rounded-xl text-white/50 text-[8px] space-y-1">
                           <p>POST /checkout/payment HTTP/1.1</p>
                           <p className="text-red-400">{"{\"amount\": 1.00}"} // Price manipulated manually</p>
                           <p>Server response: 200 OK (Invoice authorized)</p>
@@ -1386,7 +1361,7 @@ export default function CyberSecurityPage() {
                           <span>STAGE 02: HARDENED API GATEWAY</span>
                           <span className="flex items-center gap-1"><Shield className="w-3 h-3" /> VERIFIED PATCH</span>
                         </div>
-                        <div className="bg-emerald-500/5 border border-emerald-500/20 p-2.5 rounded text-white/50 text-[8px] space-y-1">
+                        <div className="bg-emerald-500/5 border border-emerald-500/20 p-2.5 rounded-xl text-white/50 text-[8px] space-y-1">
                           <p>POST /checkout/payment HTTP/1.1</p>
                           <p className="text-emerald-400">Signature checksum verified. Session token immutable.</p>
                           <p>Server response: 400 Bad Request (Checksum Error)</p>
@@ -1400,9 +1375,9 @@ export default function CyberSecurityPage() {
             </div>
           </section>
 
-          {/* Section 17. Glossary of Cyber Security Terms (WITH SEARCH) */}
+          {/* Section 17. Glossary of Cyber Security Terms */}
           <section id="glossary" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">17 // SECTOR LEXICON</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Glossary of Cyber Security Terms</h2>
               
@@ -1415,14 +1390,14 @@ export default function CyberSecurityPage() {
                     placeholder="Search security terms (e.g. SOC, CVSS, Zero Trust)..."
                     value={glossarySearch}
                     onChange={(e) => setGlossarySearch(e.target.value)}
-                    className="w-full bg-white/5 border border-white/5 focus:border-accent-cyan/40 text-xs px-10 py-3.5 rounded-xl text-white outline-none font-space transition-colors"
+                    className="w-full bg-white/5 focus:bg-white/10 text-xs px-10 py-3.5 rounded-2xl text-white outline-none font-space transition-all duration-300"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {filteredGlossary.length > 0 ? (
                     filteredGlossary.map((item, idx) => (
-                      <div key={idx} className="bg-white/[0.01] border border-white/5 p-5 rounded-2xl hover:border-accent-cyan/15 transition-all">
+                      <div key={idx} className="bg-white/[0.01] p-5 rounded-3xl hover:bg-white/[0.03] transition-all shadow-md">
                         <span className="font-space text-xs font-black text-accent-cyan uppercase tracking-wider block mb-2">
                           {item.term}
                         </span>
@@ -1441,9 +1416,9 @@ export default function CyberSecurityPage() {
             </div>
           </section>
 
-          {/* Section 18. Frequently Asked Questions (ACCORDIONS) */}
+          {/* Section 18. Frequently Asked Questions */}
           <section id="faq" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
+            <div className="pt-4">
               <span className="font-space text-[10px] tracking-widest text-accent-cyan font-bold uppercase block mb-3">18 // SECURITY KNOWLEDGE BASE</span>
               <h2 className="font-space text-3xl font-bold uppercase text-white mb-8">Frequently Asked Questions</h2>
               
@@ -1451,7 +1426,7 @@ export default function CyberSecurityPage() {
                 {faqsList.map((faq, idx) => (
                   <div 
                     key={idx} 
-                    className="bg-white/[0.01] border border-white/5 rounded-2xl overflow-hidden"
+                    className="bg-white/[0.01] rounded-3xl overflow-hidden shadow-md"
                   >
                     <button
                       onClick={() => setFaqOpen(faqOpen === idx ? null : idx)}
@@ -1488,16 +1463,14 @@ export default function CyberSecurityPage() {
 
           {/* Section 19. Get Started With WhyNotMe27 */}
           <section id="get-started" className="scroll-mt-32">
-            <div className="border-t border-white/10 pt-10">
-              <div className="bg-gradient-to-r from-accent-cyan/10 via-black to-accent-violet/10 border border-accent-cyan/25 rounded-3xl p-8 md:p-12 relative overflow-hidden text-center flex flex-col items-center">
-                {/* Background matrix canvas simulation overlay */}
+            <div className="pt-4">
+              <div className="bg-gradient-to-r from-accent-cyan/15 via-black/90 to-accent-violet/15 rounded-3xl p-8 md:p-12 relative overflow-hidden text-center flex flex-col items-center shadow-2xl">
                 <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
                 
-                {/* Floating particle glows */}
-                <div className="absolute top-10 left-10 w-32 h-32 bg-accent-cyan/10 blur-[80px] rounded-full pointer-events-none" />
-                <div className="absolute bottom-10 right-10 w-32 h-32 bg-accent-violet/10 blur-[80px] rounded-full pointer-events-none" />
+                <div className="absolute top-10 left-10 w-32 h-32 bg-accent-cyan/10 blur-[85px] rounded-full pointer-events-none" />
+                <div className="absolute bottom-10 right-10 w-32 h-32 bg-accent-violet/10 blur-[85px] rounded-full pointer-events-none" />
 
-                <div className="w-16 h-16 rounded-full bg-[#050b18] border border-accent-cyan flex items-center justify-center text-accent-cyan shadow-[0_0_20px_rgba(34,211,238,0.2)] mb-6">
+                <div className="w-16 h-16 rounded-full bg-[#050b18] border border-accent-cyan flex items-center justify-center text-accent-cyan shadow-[0_0_20px_rgba(34,211,238,0.3)] mb-6">
                   <Shield className="w-8 h-8" />
                 </div>
 
@@ -1536,7 +1509,7 @@ export default function CyberSecurityPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link 
                     href="/contact" 
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-space text-xs font-bold uppercase tracking-wider text-bg-deep bg-accent-cyan hover:bg-white hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-space text-xs font-bold uppercase tracking-wider text-bg-deep bg-accent-cyan hover:bg-white hover:shadow-[0_0_25px_rgba(34,211,238,0.45)] transition-all duration-300"
                   >
                     📩 Get a Free Consultation Today
                     <ArrowRight className="w-4 h-4" />
